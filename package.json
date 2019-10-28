@@ -1,0 +1,43 @@
+{
+  "name": "basic-music-player",
+  "version": "1.0.0",
+  "description": "Spotify clone written in vanilla JS. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start",
+    "build": "babel src -d lib",
+    "start": "node src/server/app.js",
+    "start:dev": "nodemon src/server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Danondso/basic-music-player.git"
+  },
+  "keywords": [
+    "spotify",
+    "music",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": "Dublin Anondson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Danondso/basic-music-player/issues"
+  },
+  "homepage": "https://github.com/Danondso/basic-music-player#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0"
+  }
+}
