@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Example of the Authorization Code flow with Spotify</title>
+    <title>basic-music-player</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    
     <link rel="stylesheet" href="styles/style.css">
@@ -11,7 +11,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand login-button" href="#">basic-music-player</a> 
-        <a #login href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <a id="login" href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <a id="loggedin" href="/logout" class="btn btn-primary">Logout</a>
+        <img class="profile-picture" src="{{images.0.url}}">
         <!-- TODO add in logged in name and hide the div on login -->
     </nav>
 
