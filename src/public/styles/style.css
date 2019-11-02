@@ -1,3 +1,36 @@
+
+:root {
+  --main-bg-color:  #92665d;
+  --font-color: #40404C;
+}
+
+body{
+  background: var(--main-bg-color);
+}
+
+.navbar {
+  background: var(--main-bg-color) !important;
+}
+
+.navbar-brand, .navigation-links {
+  color: var(--font-color) !important;
+}
+
+.navigation-link {
+  color: var(--font-color) !important;
+  margin-right: .4vw;
+}
+
+.btn-primary {
+  background: #854254 !important;
+}
+
+.landing-text {
+  color: var(--font-color);  
+  font-size: 3vw;
+}
+
+
 #login, #loggedin {
     display: none;
   }
@@ -5,7 +38,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 500px;
   }
 
   .login-button {
