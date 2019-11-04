@@ -47,7 +47,7 @@
   </div>
 
   <script id="user-profile-template" type="text/x-handlebars-template">
-      <div class="media">
+    <div class="media">
         <div class="pull-left">
           <img class="media-object" width="150" src="{{images.0.url}}" />
         </div>
@@ -60,16 +60,18 @@
     </script>
 
   <script id="recently-played-template" type="text/x-handlebars-template">
-    <section id="recently-played" class="container-fluid">
+    <section id="recently-played">
       <div class="row">
           {{#each items}}
-          <div id="recently-played-item">
+          <section id="recently-played-item">
               <img class="media-object album-cover" width="150" src="{{this.track.album.images.1.url}}"/>
               <div class="album-data">
-                  {{this.track.name}}                  
-                  <p>{{this.track.artists.0.name}}</p>
+                  {{this.track.name}}         
               </div>
-          </div>
+              <div class="album-data">
+                {{this.track.artists.0.name}}
+              </div>
+            </section>
           {{/each}}
       </div>
       </section>

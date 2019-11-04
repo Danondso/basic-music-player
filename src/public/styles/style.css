@@ -65,10 +65,10 @@ body{
   }
 
   .album-data {
-    overflow: ellipsis;
-    max-width: 10vw;
-  }
-
-  #recently-played {
+    /*How does this setup allow for ellipses?*/
+    text-overflow: ellipsis;
+    display: block;
     overflow: hidden;
+    white-space: nowrap;
+    max-width: 10vw;
   }
