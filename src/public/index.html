@@ -39,16 +39,14 @@
     </div>
   </div>
 
-  <div class="container">
-    <div>
+  <div class="container-fluid home-panel">
+    <div class="container">
       <div id="recently-played-container">
-
       </div>
     </div>
   </div>
 
   <script id="user-profile-template" type="text/x-handlebars-template">
-    <h1>Logged in as {{display_name}}</h1>
       <div class="media">
         <div class="pull-left">
           <img class="media-object" width="150" src="{{images.0.url}}" />
@@ -56,8 +54,6 @@
         <div class="media-body">
           <dl class="dl-horizontal">
             <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
-            <dt>Id</dt><dd>{{id}}</dd>
-            <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd>
           </dl>
         </div>
       </div>
@@ -65,10 +61,17 @@
 
   <script id="recently-played-template" type="text/x-handlebars-template">
     <section id="recently-played" class="container-fluid">
-        <div id="recently-played-item">
-          <p>{{items.0.track.album.artists.name}}</p>
-          <img class="media-object" width="150" src="{{items.0.track.album.artists.images.1.url}}"/>
-        </div>
+      <div class="row">
+          {{#each items}}
+          <div id="recently-played-item">
+              <img class="media-object album-cover" width="150" src="{{this.track.album.images.1.url}}"/>
+              <div class="album-data">
+                  {{this.track.name}}                  
+                  <p>{{this.track.artists.0.name}}</p>
+              </div>
+          </div>
+          {{/each}}
+      </div>
       </section>
     </script>
 
@@ -128,6 +131,10 @@
               $('#logout-button').show();
               $('#recently-played').show();
               $('#loggedin').show();
+
+              var recentlyPlayedSource = document.getElementById('recently-played-template').innerHTML,
+                recentlyPlayedTemplate = Handlebars.compile(recentlyPlayedSource),
+                recentlyPlayedPlaceholder = document.getElementById('recently-played-container');
               // Kick off getting the recently played tracks
               fetch('https://api.spotify.com/v1/me/player/recently-played', {
                 method: 'GET',
@@ -135,13 +142,11 @@
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + access_token,
                 }
-              }).then(result => {
-                console.log(result.body);
-                console.log(result.items[0].track.album.artists.name);
-                var recentlyPlayedSource = document.getElementById('recently-played-template').innerHTML,
-                    recentlyPlayedTemplate = Handlebars.compile(recentlyPlayedSource),
-                    recentlyPlayedPlaceholder = document.getElementById('recently-played-container');
-                recentlyPlayedPlaceholder.innerHTML = recentlyPlayedTemplate(result);
+              }).then(response => {
+                response.json().then(json => {
+                  console.log(json.items);
+                  recentlyPlayedPlaceholder.innerHTML = recentlyPlayedTemplate(json);
+                });
               });
             }
           });

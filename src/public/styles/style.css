@@ -2,6 +2,7 @@
 :root {
   --main-bg-color:  #92665d;
   --font-color: #40404C;
+  --panel-color: #98454F;
 }
 
 body{
@@ -48,4 +49,26 @@ body{
     float: right;
     width: 30;
     height: 30;
+  }
+
+  .home-panel {
+    background: var(--panel-color);
+    color: var(--font-color);
+    box-shadow: 0 4px 2px -2px;
+  }
+
+  .album-cover {
+    margin-top: 2vh;
+    border-radius: 5px;
+    margin-right: 2vw;
+
+  }
+
+  .album-data {
+    overflow: ellipsis;
+    max-width: 10vw;
+  }
+
+  #recently-played {
+    overflow: hidden;
   }
