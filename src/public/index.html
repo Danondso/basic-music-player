@@ -46,6 +46,13 @@
     </div>
   </div>
 
+  <div class="container-fluid home-panel">
+    <div class="container">
+      <div id="top-artists-container">
+      </div>
+    </div>
+  </div>
+
   <script id="user-profile-template" type="text/x-handlebars-template">
     <div class="media">
         <div class="pull-left">
@@ -60,8 +67,10 @@
     </script>
 
   <script id="recently-played-template" type="text/x-handlebars-template">
-    <h4>Recently Played</h4>
-      <section class="container row panel-container">
+    <div>
+      <h4 class="panel-title">Recently Played</h4>
+    </div>
+      <section class="container row panel-container" id="recently-played">
           {{#each items}}
           <section id="col-sm media-content">
                 <img class="media-object album-cover" width="150" src="{{this.track.album.images.1.url}}"/>
@@ -76,16 +85,13 @@
       </section>
     </script>
   
-    <script id="made-for-template" type="text/x-handlebars-template">
+    <script id="top-artists-template" type="text/x-handlebars-template">
       <section class="container row panel-container">
           {{#each items}}
           <section id="col-sm media-content">
-                <img class="media-object album-cover" width="150" src="{{this.track.album.images.1.url}}"/>
+                <img class="media-object album-cover" width="150" src="{{this.images.1.url}}"/>
                 <div class="album-data">
-                    {{this.track.name}}         
-                </div>
-                <div class="album-data">
-                  {{this.track.artists.0.name}}
+                    {{this.name}}         
                 </div>
             </section>
           {{/each}}
@@ -154,8 +160,6 @@
                 recentlyPlayedTemplate = Handlebars.compile(recentlyPlayedSource),
                 recentlyPlayedPlaceholder = document.getElementById('recently-played-container');
               // Kick off getting the recently played tracks
-              // TODO add favorite artists. 
-              //https://api.spotify.com/v1/me/top/{type}
               fetch('https://api.spotify.com/v1/me/player/recently-played', {
                 method: 'GET',
                 headers: {
@@ -164,8 +168,25 @@
                 }
               }).then(response => {
                 response.json().then(json => {
-                  console.log(json.items);
                   recentlyPlayedPlaceholder.innerHTML = recentlyPlayedTemplate(json);
+                });
+              });
+
+              fetch('https://api.spotify.com/v1/me/top/artists', {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + access_token,
+                }
+              }).then(response => {
+
+                var topArtistsSource = document.getElementById('top-artists-template').innerHTML,
+                topArtistsTemplate = Handlebars.compile(topArtistsSource),
+                topArtistsPlaceholder = document.getElementById('top-artists-container');
+                console.log(response);
+                response.json().then(json => {
+                  console.log(json.items);
+                 topArtistsPlaceholder.innerHTML = topArtistsTemplate(json);
                 });
               });
             }
@@ -196,6 +217,10 @@
         // }, false);
       }
     })();
+
+    function scroll(){
+
+    }
   </script>
 </body>
 

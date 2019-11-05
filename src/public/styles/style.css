@@ -55,12 +55,14 @@ body{
     background: var(--panel-color);
     color: var(--font-color);
     box-shadow: 0 4px 2px -2px;
+    padding-bottom: 10px;
+    
   }
 
   .album-cover {
     margin-top: 2vh;
     border-radius: 5px;
-    margin-right: 2vw;
+    margin-right: 1.21vw;
 
   }
 
@@ -71,6 +73,8 @@ body{
     overflow: hidden;
     white-space: nowrap;
     max-width: 10vw;
+
+    /* TODO ADD A MEDIA QUERY IN HERE */
   }
 
   .panel-container {
@@ -78,3 +82,51 @@ body{
     flex-wrap: nowrap;
     overflow-x: auto;
   }
+  
+.panel-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.panel-container::-webkit-scrollbar { 
+    display: none;
+}
+
+.panel-title {
+  margin-left: -.7vw;
+  padding-top: 1.8vh;
+}
+
+@media only screen and (max-width: 360px) {
+
+  .album-cover {
+    margin-right: 5vw;
+  }
+
+  .album-data {
+    max-width: 45vw;
+  }
+} 
+
+@media only screen and (max-width: 414px) {
+
+  .album-cover {
+    margin-right: 5vw;
+  }
+
+  .album-data {
+    max-width: 35vw;
+  }
+} 
+
+@media only screen and (max-width: 600px) {
+  .album-data {
+    max-width: 40vw;
+  }
+} 
+
+@media only screen and (min-width: 768px) {
+  .album-data {
+    max-width: 19vw;
+  }
+} 
