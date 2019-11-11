@@ -56,7 +56,7 @@ body{
     color: var(--font-color);
     box-shadow: 0 4px 2px -2px;
     padding-bottom: 10px;
-    
+    margin-top: 6vh;  
   }
 
   .album-cover {
@@ -67,7 +67,6 @@ body{
   }
 
   .album-data {
-    /*How does this setup allow for ellipses?*/
     text-overflow: ellipsis;
     display: block;
     overflow: hidden;
@@ -97,18 +96,18 @@ body{
   padding-top: 1.8vh;
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (min-width: 360px) and (max-width: 375px) {
 
   .album-cover {
     margin-right: 5vw;
   }
 
   .album-data {
-    max-width: 45vw;
+    max-width: 43vw;
   }
 } 
 
-@media only screen and (max-width: 414px) {
+@media only screen and (min-width: 414px) {
 
   .album-cover {
     margin-right: 5vw;
@@ -119,7 +118,7 @@ body{
   }
 } 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 600px) {
   .album-data {
     max-width: 40vw;
   }
@@ -129,4 +128,10 @@ body{
   .album-data {
     max-width: 19vw;
   }
-} 
+}
+
+@media only screen and (min-width: 1200px) {
+  .album-data {
+    max-width: 8vw;
+  }
+}

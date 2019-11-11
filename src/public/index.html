@@ -10,19 +10,19 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">basic-music-player</a>
+    <div id="user-name"></div>
+    <a id="title-brand" class="navbar-brand" href="#">basic-music-player</a>
     <div class="container-fluid">
       <div class="navigation-links">
         <a class="navigation-link" href="/home">Home</a>
         <a class="navigation-link" href="/playlists">Playlists</a>
         <a class="navigation-link" href="/podcasts">Podcasts</a>
       </div>
+      <!-- <div id="user-profile"></div> -->
       <a id="logout-button" href="/logout" class="btn btn-primary">Logout</a>
       <a id="login-button" href="/login" class="btn btn-primary">Login with Spotify</a>
     </div>
 
-    <!-- <img class="profile-picture" src="{{images.0.url}}"> -->
-    <!-- TODO add in logged in name and hide the div on login -->
   </nav>
   <div class="container" id="landing-text">
     <h1 class="landing-text">basic-music-player:</h1>
@@ -30,40 +30,22 @@
     <h2 class="landing-text">with vanilla JS</h2>
   </div>
 
-  <div class="container">
-    <div>
-      <div id="user-profile">
-      </div>
-      <div id="oauth">
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid home-panel">
+  <div id="recently-played-panel" class="container-fluid home-panel">
     <div class="container">
       <div id="recently-played-container">
       </div>
     </div>
   </div>
 
-  <div class="container-fluid home-panel">
+  <div id="top-artists-panel" class="container-fluid home-panel">
     <div class="container">
       <div id="top-artists-container">
       </div>
     </div>
   </div>
 
-  <script id="user-profile-template" type="text/x-handlebars-template">
-    <div class="media">
-        <div class="pull-left">
-          <img class="media-object" width="150" src="{{images.0.url}}" />
-        </div>
-        <div class="media-body">
-          <dl class="dl-horizontal">
-            <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
-          </dl>
-        </div>
-      </div>
+  <script id="user-name-template" type="text/x-handlebars-template">
+    <a class="navbar-brand" href="#">hello-{{display_name}}</a>
     </script>
 
   <script id="recently-played-template" type="text/x-handlebars-template">
@@ -73,7 +55,7 @@
       <section class="container row panel-container" id="recently-played">
           {{#each items}}
           <section id="col-sm media-content">
-                <img class="media-object album-cover" width="150" src="{{this.track.album.images.1.url}}"/>
+                <img class="media-object album-cover" width="150" height="150" src="{{this.track.album.images.1.url}}"/>
                 <div class="album-data">
                     {{this.track.name}}         
                 </div>
@@ -84,12 +66,15 @@
           {{/each}}
       </section>
     </script>
-  
-    <script id="top-artists-template" type="text/x-handlebars-template">
+
+  <script id="top-artists-template" type="text/x-handlebars-template">
+    <div>
+        <h4 class="panel-title">Top Artists</h4>
+      </div>
       <section class="container row panel-container">
           {{#each items}}
           <section id="col-sm media-content">
-                <img class="media-object album-cover" width="150" src="{{this.images.1.url}}"/>
+                <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}"/>
                 <div class="album-data">
                     {{this.name}}         
                 </div>
@@ -98,17 +83,9 @@
       </section>
     </script>
 
-  
-  <script id="oauth-template" type="text/x-handlebars-template">
-    <h2>oAuth info</h2>
-      <dl class="dl-horizontal">
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-        <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}</dd>
-      </dl>
-    </script>
-
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="js/spotify-api.js"></script>
   <script>
     (function () {
       /**
@@ -124,10 +101,6 @@
         }
         return hashParams;
       }
-      var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-        userProfileTemplate = Handlebars.compile(userProfileSource),
-        userProfilePlaceholder = document.getElementById('user-profile');
-
       var params = getHashParams();
 
       var access_token = params.access_token,
@@ -139,88 +112,25 @@
         alert('There was an error during the authentication');
       } else {
         if (access_token) {
-          // Gets user profile information
-          //Fetch instead?
-          $.ajax({
-            url: 'https://api.spotify.com/v1/me',
-            headers: {
-              'Authorization': 'Bearer ' + access_token
-            },
-            success: function (response) {
-              userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-              $('#login').hide();
-              $('#login-button').hide();
-              $('#landing-text').hide();
-
-              $('#logout-button').show();
-              $('#recently-played').show();
-              $('#loggedin').show();
-
-              var recentlyPlayedSource = document.getElementById('recently-played-template').innerHTML,
-                recentlyPlayedTemplate = Handlebars.compile(recentlyPlayedSource),
-                recentlyPlayedPlaceholder = document.getElementById('recently-played-container');
-              // Kick off getting the recently played tracks
-              fetch('https://api.spotify.com/v1/me/player/recently-played', {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + access_token,
-                }
-              }).then(response => {
-                response.json().then(json => {
-                  recentlyPlayedPlaceholder.innerHTML = recentlyPlayedTemplate(json);
-                });
-              });
-
-              fetch('https://api.spotify.com/v1/me/top/artists', {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + access_token,
-                }
-              }).then(response => {
-
-                var topArtistsSource = document.getElementById('top-artists-template').innerHTML,
-                topArtistsTemplate = Handlebars.compile(topArtistsSource),
-                topArtistsPlaceholder = document.getElementById('top-artists-container');
-                console.log(response);
-                response.json().then(json => {
-                  console.log(json.items);
-                 topArtistsPlaceholder.innerHTML = topArtistsTemplate(json);
-                });
-              });
-            }
-          });
+          SpotifyApiWrapper.fetchUserProfile(access_token);
+          SpotifyApiWrapper.fetchTopArtists(access_token);
+          SpotifyApiWrapper.fetchRecentlyPlayed(access_token);
         } else {
           // render initial screen
           $('#login').show();
           $('#logout-button').hide();
           $('#loggedin').hide();
+          $('#top-artists-panel').hide();
+          $('#recently-played-panel').hide();
+          $('#user-name').hide();
           //TODO fix this
           // var navigationLinks = document.getElementsByClassName('.navigation-link');
           //   navigationLinks.array.forEach(element => {
           //   element.classList.add('disabled');
           // });
         }
-
-        // //TODO have this refresh the token on failure, should that live in the back-end?
-        // document.getElementById('obtain-new-token').addEventListener('click', function () {
-        //   $.ajax({
-        //     url: '/refresh_token',
-        //     data: {
-        //       'refresh_token': refresh_token
-        //     }
-        //   }).done(function (data) {
-        //     access_token = data.access_token;
-        //     console.log(access_token);
-        //   });
-        // }, false);
       }
     })();
-
-    function scroll(){
-
-    }
   </script>
 </body>
 
