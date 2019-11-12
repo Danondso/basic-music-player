@@ -63,6 +63,40 @@ var SpotifyApiWrapper = {
             $('#loggedin').show();
             $('#user-name').show();
         });
+    },
+
+    fetchNewReleases: function (access_token) {
+        fetch('https://api.spotify.com/v1/browse/new-releases', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token,
+            }
+        }).then(response => {
+            response.json().then(json => {
+                var newReleasesSource = document.getElementById('new-releases-template').innerHTML,
+                newReleasesTemplate = Handlebars.compile(newReleasesSource),
+                newReleasesPlaceholder = document.getElementById('new-releases-container');
+                newReleasesPlaceholder.innerHTML = newReleasesTemplate(json.albums);
+            });
+        });
+    },
+
+    fetchFeaturedPlaylists: function (access_token) {
+        fetch('https://api.spotify.com/v1/browse/featured-playlists', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token,
+            }
+        }).then(response => {
+            response.json().then(json => {
+                var featuredPlaylistsSource = document.getElementById('featured-playlists-template').innerHTML,
+                featuredPlaylistsTemplate = Handlebars.compile(featuredPlaylistsSource),
+                featuredPlaylistsPlaceholder = document.getElementById('featured-playlists-container');
+                featuredPlaylistsPlaceholder.innerHTML = featuredPlaylistsTemplate(json.playlists);
+            });
+        });
     }
 
 

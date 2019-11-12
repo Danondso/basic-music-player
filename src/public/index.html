@@ -44,9 +44,23 @@
     </div>
   </div>
 
+  <div id="new-releases-panel" class="container-fluid home-panel">
+    <div class="container">
+      <div id="new-releases-container">
+      </div>
+    </div>
+  </div>
+
+  <div id="featured-playlists-panel" class="container-fluid home-panel">
+    <div class="container">
+      <div id="featured-playlists-container">
+      </div>
+    </div>
+  </div>
+
   <script id="user-name-template" type="text/x-handlebars-template">
     <a class="navbar-brand" href="#">hello-{{display_name}}</a>
-    </script>
+  </script>
 
   <script id="recently-played-template" type="text/x-handlebars-template">
     <div>
@@ -83,6 +97,39 @@
       </section>
     </script>
 
+    <script id="new-releases-template" type="text/x-handlebars-template">
+      <div>
+          <h4 class="panel-title">New Releases</h4>
+        </div>
+        <section class="container row panel-container">
+            {{#each items}}
+            <section id="col-sm media-content">
+                  <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}"/>
+                  <div class="album-data">
+                      {{this.name}}         
+                  </div>
+              </section>
+            {{/each}}
+        </section>
+      </script>
+
+
+      <script id="featured-playlists-template" type="text/x-handlebars-template">
+        <div>
+            <h4 class="panel-title">Featured Playlists</h4>
+          </div>
+          <section class="container row panel-container">
+              {{#each items}}
+              <section id="col-sm media-content">
+                    <img class="media-object album-cover" width="150" height="150" src="{{this.images.0.url}}"/>
+                    <div class="album-data">
+                        {{this.name}}         
+                    </div>
+                </section>
+              {{/each}}
+          </section>
+        </script>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="js/spotify-api.js"></script>
@@ -115,6 +162,8 @@
           SpotifyApiWrapper.fetchUserProfile(access_token);
           SpotifyApiWrapper.fetchTopArtists(access_token);
           SpotifyApiWrapper.fetchRecentlyPlayed(access_token);
+          SpotifyApiWrapper.fetchNewReleases(access_token);
+          SpotifyApiWrapper.fetchFeaturedPlaylists(access_token);
         } else {
           // render initial screen
           $('#login').show();
