@@ -9,16 +9,12 @@ var SpotifyApiWrapper = {
             }
         }).then(response => {
             response.json().then(json => {
-                var topArtistsSource = document.getElementById('top-artists-template').innerHTML,
-                topArtistsTemplate = Handlebars.compile(topArtistsSource),
-                topArtistsPlaceholder = document.getElementById('top-artists-container');
-                topArtistsPlaceholder.innerHTML = topArtistsTemplate(json);
+                this.renderTemplate('top-artists-template', 'top-artists-container', json);
             });
         });
     },
 
     fetchRecentlyPlayed: function (access_token) {
-        // Kick off getting the recently played tracks
         fetch('https://api.spotify.com/v1/me/player/recently-played', {
             method: 'GET',
             headers: {
@@ -27,15 +23,12 @@ var SpotifyApiWrapper = {
             }
         }).then(response => {
             response.json().then(json => {
-                var recentlyPlayedSource = document.getElementById('recently-played-template').innerHTML,
-                recentlyPlayedTemplate = Handlebars.compile(recentlyPlayedSource),
-                recentlyPlayedPlaceholder = document.getElementById('recently-played-container');
-                recentlyPlayedPlaceholder.innerHTML = recentlyPlayedTemplate(json);
+                this.renderTemplate('recently-played-template', 'recently-played-container', json);
             });
         });
     },
 
-    fetchUserProfile: function (access_token) {
+    fetchUserProfile: function (access_token, templateName, ) {
         fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
             headers: {
@@ -50,14 +43,14 @@ var SpotifyApiWrapper = {
                 // userProfilePlaceholder = document.getElementById('user-profile');
                 // userProfilePlaceholder.innerHTML = userProfileTemplate(json);
                 var userProfileSource = document.getElementById('user-name-template').innerHTML,
-                userProfileTemplate = Handlebars.compile(userProfileSource),
-                userProfilePlaceholder = document.getElementById('user-name');
+                    userProfileTemplate = Handlebars.compile(userProfileSource),
+                    userProfilePlaceholder = document.getElementById('user-name');
                 userProfilePlaceholder.innerHTML = userProfileTemplate(json);
             });
             $('#login').hide();
             $('#login-button').hide();
             $('#landing-text').hide();
-            $('#title-brand').hide();            
+            $('#title-brand').hide();
             $('#logout-button').show();
             $('#recently-played').show();
             $('#loggedin').show();
@@ -74,10 +67,7 @@ var SpotifyApiWrapper = {
             }
         }).then(response => {
             response.json().then(json => {
-                var newReleasesSource = document.getElementById('new-releases-template').innerHTML,
-                newReleasesTemplate = Handlebars.compile(newReleasesSource),
-                newReleasesPlaceholder = document.getElementById('new-releases-container');
-                newReleasesPlaceholder.innerHTML = newReleasesTemplate(json.albums);
+                this.renderTemplate('new-releases-template', 'new-releases-container', json.albums);
             });
         });
     },
@@ -91,25 +81,28 @@ var SpotifyApiWrapper = {
             }
         }).then(response => {
             response.json().then(json => {
-                var featuredPlaylistsSource = document.getElementById('featured-playlists-template').innerHTML,
-                featuredPlaylistsTemplate = Handlebars.compile(featuredPlaylistsSource),
-                featuredPlaylistsPlaceholder = document.getElementById('featured-playlists-container');
-                featuredPlaylistsPlaceholder.innerHTML = featuredPlaylistsTemplate(json.playlists);
+                this.renderTemplate('featured-playlists-template', 'featured-playlists-container', json.playlists);
             });
         });
+    },
+
+    refreshToken: function (refresh_token) {
+        fetch('/refresh_token', {
+            method: 'POST',
+            body: JSON.stringify({
+                'refresh_token': refresh_token
+            }),
+        }).then(response => {
+            response.json().then(json => {
+                return json.access_token;
+            });
+        });
+    },
+
+    renderTemplate: function (templateName, templateContainer, json) {
+        var templateSource = document.getElementById(templateName).innerHTML,
+            template = Handlebars.compile(templateSource),
+            placeholder = document.getElementById(templateContainer);
+        placeholder.innerHTML = template(json);
     }
-
-
-        // //TODO have this refresh the token on failure, should that live in the back-end?
-        // document.getElementById('obtain-new-token').addEventListener('click', function () {
-        //   $.ajax({̀
-        //     url: '/refresh_token',
-        //     data: {
-        //       'refresh_token': refresh_token
-        //     }
-        //   }).done(function (data) {
-        //     access_token = data.access_token;
-        //     console.log(access_token);
-        //   });
-        // }, false);
 }
