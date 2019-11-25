@@ -66,6 +66,8 @@
     <div>
       <h4 class="panel-title">Recently Played</h4>
     </div>
+    <button onclick="scrollLeft()">scroll left</button>
+    <button onclick="scrollRight()">scroll right</button>
       <section class="container row panel-container" id="recently-played">
           {{#each items}}
           <section id="col-sm media-content">
@@ -97,8 +99,8 @@
       </section>
     </script>
 
-    <script id="new-releases-template" type="text/x-handlebars-template">
-      <div>
+  <script id="new-releases-template" type="text/x-handlebars-template">
+    <div>
           <h4 class="panel-title">New Releases</h4>
         </div>
         <section class="container row panel-container">
@@ -114,8 +116,8 @@
       </script>
 
 
-      <script id="featured-playlists-template" type="text/x-handlebars-template">
-        <div>
+  <script id="featured-playlists-template" type="text/x-handlebars-template">
+    <div>
             <h4 class="panel-title">Featured Playlists</h4>
           </div>
           <section class="container row panel-container">
@@ -180,6 +182,19 @@
         }
       }
     })();
+
+    function scrollRight() {
+      $('#recently-played').animate({
+        scrollLeft: '+=600'
+      }, 500);
+    };
+
+    function scrollLeft() {
+      $('#recently-played').animate({
+        scrollLeft: '-=600'
+      }, 500);
+    };
+
   </script>
 </body>
 
