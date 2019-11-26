@@ -30,31 +30,23 @@
     <h2 class="landing-text">with vanilla JS</h2>
   </div>
 
-  <div id="recently-played-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="recently-played-container">
-      </div>
+  <div id="recently-played-panel">
+    <div id="recently-played-container">
     </div>
   </div>
 
-  <div id="top-artists-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="top-artists-container">
-      </div>
+  <div id="top-artists-panel">
+    <div id="top-artists-container">
     </div>
   </div>
 
-  <div id="new-releases-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="new-releases-container">
-      </div>
+  <div id="new-releases-panel">
+    <div id="new-releases-container">
     </div>
   </div>
 
-  <div id="featured-playlists-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="featured-playlists-container">
-      </div>
+  <div id="featured-playlists-panel">
+    <div id="featured-playlists-container">
     </div>
   </div>
 
@@ -71,32 +63,38 @@
       <section class="container row panel-container" id="recently-played">
           {{#each items}}
           <section id="col-sm media-content">
-                <img class="media-object album-cover" width="150" height="150" src="{{this.track.album.images.1.url}}"/>
-                <div class="album-data">
-                    {{this.track.name}}         
-                </div>
-                <div class="album-data">
-                  {{this.track.artists.0.name}}
-                </div>
-            </section>
+            <img class="media-object album-cover" width="150" height="150" src="{{this.track.album.images.1.url}}" />
+            <div class="album-data">
+              {{this.track.name}}
+            </div>
+            <div class="album-data">
+              {{this.track.artists.0.name}}
+            </div>
+          </section>
           {{/each}}
-      </section>
+        </section>
+      </div>
+    </div>
     </script>
 
   <script id="top-artists-template" type="text/x-handlebars-template">
-    <div>
-        <h4 class="panel-title">Top Artists</h4>
-      </div>
-      <section class="container row panel-container">
+    <div class="container-fluid home-panel">
+      <div class="container">
+        <div>
+          <h4 class="panel-title">Top Artists</h4>
+        </div>
+        <section class="container row panel-container">
           {{#each items}}
           <section id="col-sm media-content">
-                <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}"/>
-                <div class="album-data">
-                    {{this.name}}         
-                </div>
-            </section>
+            <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}" />
+            <div class="album-data">
+              {{this.name}}
+            </div>
+          </section>
           {{/each}}
-      </section>
+        </section>
+      </div>
+    </div>
     </script>
 
   <script id="new-releases-template" type="text/x-handlebars-template">
@@ -106,14 +104,16 @@
         <section class="container row panel-container">
             {{#each items}}
             <section id="col-sm media-content">
-                  <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}"/>
-                  <div class="album-data">
-                      {{this.name}}         
-                  </div>
-              </section>
+              <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}" />
+              <div class="album-data">
+                {{this.name}}
+              </div>
+            </section>
             {{/each}}
-        </section>
-      </script>
+          </section>
+        </div>
+      </div>
+    </script>
 
 
   <script id="featured-playlists-template" type="text/x-handlebars-template">
@@ -130,7 +130,11 @@
                 </section>
               {{/each}}
           </section>
-        </script>
+          {{/each}}
+        </section>
+      </div>
+    </div>
+  </script>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -194,7 +198,6 @@
         scrollLeft: '-=600'
       }, 500);
     };
-
   </script>
 </body>
 
