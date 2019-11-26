@@ -1,11 +1,12 @@
 
 :root {
-  --main-bg-color:  #92665d;
+  --main-bg-color:  #DAD9C7;
   --font-color: #40404C;
-  --panel-color: #98454F;
+  --panel-color: #7A8392;
 }
 
 body{
+  scroll-behavior: smooth;
   background: var(--main-bg-color);
 }
 
@@ -23,7 +24,9 @@ body{
 }
 
 .btn-primary {
-  background: #854254 !important;
+  background: #D48F81 !important;
+  color: #303C52;
+  box-shadow: 2px 1px 6px #888888;
 }
 
 .landing-text {
@@ -134,4 +137,8 @@ body{
   .album-data {
     max-width: 8vw;
   }
+}
+
+.selectors {
+  float: right;
 }
