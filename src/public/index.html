@@ -19,16 +19,18 @@
         <a class="navigation-link" href="/playlists">Playlists</a>
         <a class="navigation-link" href="/podcasts">Podcasts</a>
       </div>
-      <!-- <div id="user-profile"></div> -->
       <a id="logout-button" href="/logout" class="btn btn-primary">Logout</a>
       <a id="login-button" href="/login" class="btn btn-primary">Login with Spotify</a>
     </div>
 
   </nav>
-  <div class="container" id="landing-text">
-    <h1 class="landing-text">basic-music-player:</h1>
-    <h2 class="landing-text">listen to spotify</h2>
-    <h2 class="landing-text">with vanilla JS</h2>
+  <div class="container-fluid" id="landing-text">
+    <div class="container landing-text-container">
+        <h1 class="landing-text"><strong>basic-music-player:</strong></h1>
+        <h2 class="landing-text">listen to spotify</h2>
+        <h2 class="landing-text">with vanilla JS</h2>
+    </div>
+    
   </div>
 
   <div id="recently-played-panel" class="container-fluid home-panel">
@@ -187,6 +189,9 @@
           $('#loggedin').hide();
           $('#top-artists-panel').hide();
           $('#recently-played-panel').hide();
+          $('#featured-playlists-panel').hide();
+          $('#new-releases-panel').hide();
+
           $('#user-name').hide();
           //TODO fix this
           // var navigationLinks = document.getElementsByClassName('.navigation-link');
@@ -199,7 +204,7 @@
   </script>
 
   <script>
-      function scrollPanelRight(element) {
+    function scrollPanelRight(element) {
       $(element).animate({
         scrollLeft: '+=600'
       }, 500);

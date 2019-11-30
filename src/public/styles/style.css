@@ -21,17 +21,24 @@ body{
 .navigation-link {
   color: var(--font-color) !important;
   margin-right: .4vw;
+  padding: 1rem;
 }
 
 .btn-primary {
   background: #D48F81 !important;
   color: #303C52;
   box-shadow: 2px 1px 6px #888888;
+  border-radius: 20px;
 }
 
 .landing-text {
   color: var(--font-color);  
   font-size: 3vw;
+}
+
+.landing-text-container {
+  margin-top: 4vh;
+  margin-left:24vw;
 }
 
 
@@ -75,8 +82,6 @@ body{
     overflow: hidden;
     white-space: nowrap;
     max-width: 10vw;
-
-    /* TODO ADD A MEDIA QUERY IN HERE */
   }
 
   .panel-container {
