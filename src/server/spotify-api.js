@@ -6,7 +6,7 @@ const SpotifyApiWrapper = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token,
+                'Authorization': access_token,
             }
         });
         const result = await response.json();
@@ -18,7 +18,7 @@ const SpotifyApiWrapper = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token,
+                'Authorization': access_token,
             }
         });
         const result = await response.json();
@@ -30,11 +30,10 @@ const SpotifyApiWrapper = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token,
+                'Authorization': access_token,
             }
         });
         const result = await response.json();
-        console.log('NEW RELEASES: ', result)
         return result.albums.items;
     },
 
@@ -43,29 +42,40 @@ const SpotifyApiWrapper = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token,
+                'Authorization': access_token,
             }
         });
         const result = await response.json();
-        console.log('FEATURED PLAYLISTS: ', result.playlists)
         return result.playlists.items;
     },
 
-    fetchUserProfile: function (access_token, templateName, ) {
+    fetchUserProfile: function (access_token) {
         fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
+                'Authorization': access_token
             }
         }).then(response => {
             response.json().then(json => {
-                //TODO return the json here for rendering
             }).catch(error => {
                 console.log('ERROR:', error);
             });
             //TODO replace the jQUery hide stuff with templated 'if'
         });
+    },
+
+    fetchAlbum: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/albums/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('ALBUM: ', JSON.stringify(result))
+        return result;
     },
 
     refreshToken: function (refresh_token) {

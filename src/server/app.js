@@ -42,8 +42,23 @@ app.get('/login', function (req, res) {
     }));
 });
 
+app.get('/album/:id', function (req, res) {
+  let access_token = req.cookies.access_token;
+  SpotifyApiWrapper.fetchAlbum(access_token, req.params.id).then(result => {
+    res.render('album', {
+      albumImage: result.images[1].url,
+      tracks: result.tracks,
+      albumId: req.params.id
+    })
+  });
+});
+
 app.get('/', function (req, res) {
   res.render('login')
+});
+
+app.get('/home', function (req, res) {
+  renderHomePanel(res, req.cookies.access_token)
 });
 
 app.get('/callback', function (req, res) {
@@ -73,9 +88,9 @@ app.get('/callback', function (req, res) {
 
     request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        let access_token = body.access_token;
+        let access_token = 'Bearer ' + body.access_token;
         let refresh_token = body.refresh_token;
-        res.cookie('access_token', 'Bearer ' + access_token, {
+        res.cookie('access_token', access_token, {
           expires: new Date(Date.now() + 8 * 3600000),
         })
         res.cookie('refresh_token', refresh_token, {
