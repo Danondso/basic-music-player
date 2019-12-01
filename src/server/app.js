@@ -43,7 +43,7 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-  res.render('main')
+  res.render('login')
 });
 
 app.get('/callback', function (req, res) {
@@ -102,7 +102,7 @@ function renderHomePanel(res, access_token) {
       featuredPlaylistsTitle: 'Featured Playlists',
       featuredPlaylistItems: result.featuredPlaylists,
       topArtistsTitle: 'Top Artists',
-      topArtistItems: result.topArtists, 
+      topArtistItems: result.topArtists,
     });
   });
 }
