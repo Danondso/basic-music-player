@@ -1,37 +1,54 @@
 import fetch from 'node-fetch';
 const SpotifyApiWrapper = {
 
-    fetchTopArtists: function (access_token) {
-        fetch('https://api.spotify.com/v1/me/top/artists', {
+    fetchTopArtists: async function (access_token) {
+        const response = await fetch('https://api.spotify.com/v1/me/top/artists', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + access_token,
             }
-        }).then(response => {
-            response.json().then(json => {
-                this.renderTemplate('top-artists-template', 'top-artists-container', json);
-            });
-        }).catch(error => {
-            console.log('ERROR:', error);
         });
+        const result = await response.json();
+        return result.items;
     },
 
-    fetchRecentlyPlayed: function (access_token) {
-        fetch('https://api.spotify.com/v1/me/player/recently-played', {
+    fetchRecentlyPlayed: async function (access_token) {
+        const response = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + access_token,
             }
-        }).then(response => {
-            response.json().then(json => {
-                return json;
-                // this.renderTemplate('recently-played-template', 'recently-played-container', json);
-            });
-        }).catch(error => {
-            console.log('ERROR:', error);
         });
+        const result = await response.json();
+        return result.items;
+    },
+
+    fetchNewReleases: async function (access_token) {
+        const response = await fetch('https://api.spotify.com/v1/browse/new-releases', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('NEW RELEASES: ', result)
+        return result.albums.items;
+    },
+
+    fetchFeaturedPlaylists: async function (access_token) {
+        const response = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('FEATURED PLAYLISTS: ', result.playlists)
+        return result.playlists.items;
     },
 
     fetchUserProfile: function (access_token, templateName, ) {
@@ -43,58 +60,11 @@ const SpotifyApiWrapper = {
             }
         }).then(response => {
             response.json().then(json => {
-                // TODO move the dom manipulation out to it's own function.
-                // var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-                // userProfileTemplate = Handlebars.compile(userProfileSource),
-                // userProfilePlaceholder = document.getElementById('user-profile');
-                // userProfilePlaceholder.innerHTML = userProfileTemplate(json);
-                var userProfileSource = document.getElementById('user-name-template').innerHTML,
-                    userProfileTemplate = Handlebars.compile(userProfileSource),
-                    userProfilePlaceholder = document.getElementById('user-name');
-                userProfilePlaceholder.innerHTML = userProfileTemplate(json);
+                //TODO return the json here for rendering
             }).catch(error => {
                 console.log('ERROR:', error);
             });
-            // $('#login').hide();
-            // $('#login-button').hide();
-            // $('#landing-text').hide();
-            // $('#title-brand').hide();
-            // $('#logout-button').show();
-            // $('#recently-played').show();
-            // $('#loggedin').show();
-            // $('#user-name').show();
-        });
-    },
-
-    fetchNewReleases: function (access_token) {
-        fetch('https://api.spotify.com/v1/browse/new-releases', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token,
-            }
-        }).then(response => {
-            response.json().then(json => {
-                this.renderTemplate('new-releases-template', 'new-releases-container', json.albums);
-            });
-        }).catch(error => {
-            console.log('ERROR:', error);
-        });
-    },
-
-    fetchFeaturedPlaylists: function (access_token) {
-        fetch('https://api.spotify.com/v1/browse/featured-playlists', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token,
-            }
-        }).then(response => {
-            response.json().then(json => {
-                this.renderTemplate('featured-playlists-template', 'featured-playlists-container', json.playlists);
-            });
-        }).catch(error => {
-            console.log('ERROR:', error);
+            //TODO replace the jQUery hide stuff with templated 'if'
         });
     },
 
@@ -111,11 +81,18 @@ const SpotifyApiWrapper = {
         });
     },
 
-    renderTemplate: function (templateName, templateContainer, json) {
-        var templateSource = document.getElementById(templateName).innerHTML,
-            template = Handlebars.compile(templateSource),
-            placeholder = document.getElementById(templateContainer);
-        placeholder.innerHTML = template(json);
+    fetchHomeData: async function (access_token) {
+        let featuredPlaylists = await this.fetchFeaturedPlaylists(access_token);
+        let topArtists = await this.fetchTopArtists(access_token);
+        let newReleases = await this.fetchNewReleases(access_token);
+        let recentlyPlayed = await this.fetchRecentlyPlayed(access_token);
+
+        return {
+            recentlyPlayed: recentlyPlayed,
+            newReleases: newReleases,
+            topArtists: topArtists,
+            featuredPlaylists: featuredPlaylists
+        }
     }
 }
 

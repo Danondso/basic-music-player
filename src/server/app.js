@@ -43,7 +43,7 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-  res.render('login')
+  res.render('main')
 });
 
 app.get('/callback', function (req, res) {
@@ -81,13 +81,7 @@ app.get('/callback', function (req, res) {
         res.cookie('refresh_token', refresh_token, {
           expires: new Date(Date.now() + 8 * 3600000),
         })
-        let recentlyPlayedList = SpotifyApiWrapper.fetchRecentlyPlayed(access_token).then(result => {
-          console.log(result);
-        });
-        console.log(recentlyPlayedList);
-        res.render('home', {
-          items: recentlyPlayedList
-        });
+        renderHomePanel(res, access_token);
       } else {
         res.redirect('/#' +
           querystring.stringify({
@@ -98,9 +92,20 @@ app.get('/callback', function (req, res) {
   }
 });
 
-
-
-
+function renderHomePanel(res, access_token) {
+  SpotifyApiWrapper.fetchHomeData(access_token).then(result => {
+    res.render('home', {
+      recentlyPlayedTitle: 'Recently Played',
+      recentlyPlayedItems: result.recentlyPlayed,
+      newReleaseTitle: 'New Releases',
+      newReleaseItems: result.newReleases,
+      featuredPlaylistsTitle: 'Featured Playlists',
+      featuredPlaylistItems: result.featuredPlaylists,
+      topArtistsTitle: 'Top Artists',
+      topArtistItems: result.topArtists, 
+    });
+  });
+}
 
 app.get('/refresh_token', function (req, res) {
   let refresh_token = req.query.refresh_token;
