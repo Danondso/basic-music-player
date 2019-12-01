@@ -1,4 +1,5 @@
-var SpotifyApiWrapper = {
+import fetch from 'node-fetch';
+const SpotifyApiWrapper = {
 
     fetchTopArtists: function (access_token) {
         fetch('https://api.spotify.com/v1/me/top/artists', {
@@ -11,6 +12,8 @@ var SpotifyApiWrapper = {
             response.json().then(json => {
                 this.renderTemplate('top-artists-template', 'top-artists-container', json);
             });
+        }).catch(error => {
+            console.log('ERROR:', error);
         });
     },
 
@@ -23,8 +26,11 @@ var SpotifyApiWrapper = {
             }
         }).then(response => {
             response.json().then(json => {
-                this.renderTemplate('recently-played-template', 'recently-played-container', json);
+                return json;
+                // this.renderTemplate('recently-played-template', 'recently-played-container', json);
             });
+        }).catch(error => {
+            console.log('ERROR:', error);
         });
     },
 
@@ -46,15 +52,17 @@ var SpotifyApiWrapper = {
                     userProfileTemplate = Handlebars.compile(userProfileSource),
                     userProfilePlaceholder = document.getElementById('user-name');
                 userProfilePlaceholder.innerHTML = userProfileTemplate(json);
+            }).catch(error => {
+                console.log('ERROR:', error);
             });
-            $('#login').hide();
-            $('#login-button').hide();
-            $('#landing-text').hide();
-            $('#title-brand').hide();
-            $('#logout-button').show();
-            $('#recently-played').show();
-            $('#loggedin').show();
-            $('#user-name').show();
+            // $('#login').hide();
+            // $('#login-button').hide();
+            // $('#landing-text').hide();
+            // $('#title-brand').hide();
+            // $('#logout-button').show();
+            // $('#recently-played').show();
+            // $('#loggedin').show();
+            // $('#user-name').show();
         });
     },
 
@@ -69,6 +77,8 @@ var SpotifyApiWrapper = {
             response.json().then(json => {
                 this.renderTemplate('new-releases-template', 'new-releases-container', json.albums);
             });
+        }).catch(error => {
+            console.log('ERROR:', error);
         });
     },
 
@@ -83,6 +93,8 @@ var SpotifyApiWrapper = {
             response.json().then(json => {
                 this.renderTemplate('featured-playlists-template', 'featured-playlists-container', json.playlists);
             });
+        }).catch(error => {
+            console.log('ERROR:', error);
         });
     },
 
@@ -106,3 +118,5 @@ var SpotifyApiWrapper = {
         placeholder.innerHTML = template(json);
     }
 }
+
+export default SpotifyApiWrapper;

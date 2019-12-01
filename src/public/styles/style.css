@@ -29,6 +29,7 @@ body{
   color: #303C52;
   box-shadow: 2px 1px 6px #888888;
   border-radius: 20px;
+  border-color: #000000;
 }
 
 .landing-text {

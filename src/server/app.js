@@ -3,6 +3,8 @@ import request from 'request';
 import cors from 'cors';
 import querystring from 'querystring';
 import cookieParser from 'cookie-parser';
+import exphbs from 'express-handlebars';
+import SpotifyApiWrapper from './spotify-api';
 require('dotenv').config();
 
 const client_id = process.env.CLIENT_ID;
@@ -13,15 +15,21 @@ var stateKey = 'spotify_auth_state';
 
 var app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(express.static('src/public'))
-   .use(cors())
-   .use(cookieParser());
+  .use(cors())
+  .use(cookieParser());
 
-app.get('/login', function(req, res) {
+var hbs = exphbs.create({
+  /* config */
+});
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
+app.get('/login', function (req, res) {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
-
   // your application requests authorization
   const scope = 'user-read-private user-read-email user-read-recently-played user-top-read';
   res.redirect('https://accounts.spotify.com/authorize?' +
@@ -34,11 +42,11 @@ app.get('/login', function(req, res) {
     }));
 });
 
-app.get('/callback', function(req, res) {
+app.get('/', function (req, res) {
+  res.render('login')
+});
 
-  // your application requests refresh and access tokens
-  // after checking the state parameter
-
+app.get('/callback', function (req, res) {
   const code = req.query.code || null;
   const state = req.query.state || null;
   const storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -63,29 +71,23 @@ app.get('/callback', function(req, res) {
       json: true
     };
 
-    request.post(authOptions, function(error, response, body) {
+    request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-
         let access_token = body.access_token;
         let refresh_token = body.refresh_token;
-
-        // let options = {
-        //   url: 'https://api.spotify.com/v1/me',
-        //   headers: { 'Authorization': 'Bearer ' + access_token },
-        //   json: true
-        // };
-
-        // // use the access token to access the Spotify Web API
-        // request.get(options, function(error, response, body) {
-        //   console.log(body);
-        // });
-
-        // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
+        res.cookie('access_token', 'Bearer ' + access_token, {
+          expires: new Date(Date.now() + 8 * 3600000),
+        })
+        res.cookie('refresh_token', refresh_token, {
+          expires: new Date(Date.now() + 8 * 3600000),
+        })
+        let recentlyPlayedList = SpotifyApiWrapper.fetchRecentlyPlayed(access_token).then(result => {
+          console.log(result);
+        });
+        console.log(recentlyPlayedList);
+        res.render('home', {
+          items: recentlyPlayedList
+        });
       } else {
         res.redirect('/#' +
           querystring.stringify({
@@ -96,12 +98,17 @@ app.get('/callback', function(req, res) {
   }
 });
 
-app.get('/refresh_token', function(req, res) {
-  // requesting access token from refresh token
+
+
+
+
+app.get('/refresh_token', function (req, res) {
   let refresh_token = req.query.refresh_token;
   let authOptions = {
     url: 'https://accounts.spotify.com/api/token',
-    headers: { 'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64') },
+    headers: {
+      'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
+    },
     form: {
       grant_type: 'refresh_token',
       refresh_token: refresh_token
@@ -109,7 +116,7 @@ app.get('/refresh_token', function(req, res) {
     json: true
   };
 
-  request.post(authOptions, function(error, response, body) {
+  request.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       const access_token = body.access_token;
       res.send({
@@ -124,7 +131,7 @@ app.get('/refresh_token', function(req, res) {
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
-var generateRandomString = function(length) {
+var generateRandomString = function (length) {
   let text = '';
   let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 

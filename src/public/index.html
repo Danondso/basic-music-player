@@ -22,131 +22,14 @@
       <a id="logout-button" href="/logout" class="btn btn-primary">Logout</a>
       <a id="login-button" href="/login" class="btn btn-primary">Login with Spotify</a>
     </div>
-
   </nav>
   <div class="container-fluid" id="landing-text">
     <div class="container landing-text-container">
-        <h1 class="landing-text"><strong>basic-music-player:</strong></h1>
-        <h2 class="landing-text">listen to spotify</h2>
-        <h2 class="landing-text">with vanilla JS</h2>
-    </div>
-    
-  </div>
-
-  <div id="recently-played-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="recently-played-container">
-      </div>
+      <h1 class="landing-text"><strong>basic-music-player:</strong></h1>
+      <h2 class="landing-text">listen to spotify</h2>
+      <h2 class="landing-text">with vanilla JS</h2>
     </div>
   </div>
-
-  <div id="top-artists-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="top-artists-container">
-      </div>
-    </div>
-  </div>
-
-  <div id="new-releases-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="new-releases-container">
-      </div>
-    </div>
-  </div>
-
-  <div id="featured-playlists-panel" class="container-fluid home-panel">
-    <div class="container">
-      <div id="featured-playlists-container">
-      </div>
-    </div>
-  </div>
-
-  <script id="user-name-template" type="text/x-handlebars-template">
-    <a class="navbar-brand" href="#">hello-{{display_name}}</a>
-  </script>
-
-  <script id="recently-played-template" type="text/x-handlebars-template">
-    <div>
-      <h4 class="panel-title">Recently Played</h4>
-      <div class="selectors">
-          <i onclick="scrollPanelLeft('#recently-played')" class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
-          <i onclick="scrollPanelRight('#recently-played')" class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-      </div>
-    </div>
-      <section class="container row panel-container" id="recently-played">
-          {{#each items}}
-          <section id="col-sm media-content">
-            <img class="media-object album-cover" width="150" height="150" src="{{this.track.album.images.1.url}}" />
-            <div class="album-data">
-              {{this.track.name}}
-            </div>
-            <div class="album-data">
-              {{this.track.artists.0.name}}
-            </div>
-          </section>
-          {{/each}}
-        </section>
-    </script>
-
-  <script id="top-artists-template" type="text/x-handlebars-template">
-    <div>
-          <h4 class="panel-title">Top Artists</h4>
-          <div class="selectors">
-              <i onclick="scrollPanelLeft('#top-artists')" class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
-              <i onclick="scrollPanelRight('#top-artists')" class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-          </div>
-        </div>
-        <section class="container row panel-container" id="top-artists">
-          {{#each items}}
-          <section id="col-sm media-content">
-            <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}" />
-            <div class="album-data">
-              {{this.name}}
-            </div>
-          </section>
-          {{/each}}
-        </section>
-    </script>
-
-  <script id="new-releases-template" type="text/x-handlebars-template">
-    <div>
-        <h4 class="panel-title">New Releases</h4>
-        <div class="selectors">
-            <i onclick="scrollPanelLeft('#new-releases')" class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
-            <i onclick="scrollPanelRight('#new-releases')" class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-        </div>
-    </div>
-      <section class="container row panel-container" id="new-releases">
-        {{#each items}}
-        <section id="col-sm media-content">
-          <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}" />
-          <div class="album-data">
-            {{this.name}}
-          </div>
-        </section>
-        {{/each}}
-      </section>
-  </script>
-
-  <script id="featured-playlists-template" type="text/x-handlebars-template">
-    <div>
-      <h4 class="panel-title">Featured Playlists</h4>
-      <div class="selectors">
-          <i onclick="scrollPanelLeft('#featured-playlists')" class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
-          <i onclick="scrollPanelRight('#featured-playlists')" class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-      </div>
-    </div>
-    <section class="container row panel-container" id="featured-playlists">
-      {{#each items}}
-      <section id="col-sm media-content">
-        <img class="media-object album-cover" width="150" height="150" src="{{this.images.0.url}}"/>
-          <div class="album-data">
-            {{this.name}}         
-          </div>
-      </section>
-      {{/each}}
-    </section>
-  </script>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
