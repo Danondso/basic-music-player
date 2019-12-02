@@ -1,6 +1,22 @@
 <div class="container-fluid home-panel">
-    <div>
-        <img src="{{albumImage}}" />
+
+    <div class="container">
+        <div class="row album-info-panel">
+            <img src="{{albumImage}}" />
+            <div class="row album-info">
+                <div class="col">
+                    <h2>
+                        <strong>{{albumName}}</strong>
+                    </h2>
+                    <h5>
+                        by {{artistName}}
+                    </h5>
+                    <h5>
+                        {{trackCount}} songs, {{duration}} ms
+                    </h5>
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         {{> tracklist}}

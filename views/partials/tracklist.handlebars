@@ -1,8 +1,18 @@
 <div class="container">
     {{#each tracks.items}}
-    <li>{{this.track_number}}</li>
-    <li>{{this.name}}</li>
-    <li>{{this.duration_ms}}</li>
-    <li>{{this.href}}</li>
+    <div class="row">
+        <div class="col-lg-1 col-xl-1">
+            {{this.track_number}}
+        </div>
+        <div class="col-lg-8 col-xl-8">
+            {{this.name}}
+        </div>
+        <div class="col-lg-2 col-xl-2">
+            <span class="track-time">{{this.duration_ms}}</span>
+        </div>
+        {{!-- <div class="col">
+            {{this.href}}
+        </div> --}}
+    </div>
     {{/each}}
 </div>

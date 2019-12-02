@@ -148,3 +148,15 @@ body{
 .selectors {
   float: right;
 }
+
+.album-info-panel {
+  padding-top: 12vh;
+}
+
+.album-info {
+  padding-left: 1rem;
+}
+
+.track-time{
+  float: right;
+}

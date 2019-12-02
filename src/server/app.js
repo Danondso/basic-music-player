@@ -47,6 +47,11 @@ app.get('/album/:id', function (req, res) {
   SpotifyApiWrapper.fetchAlbum(access_token, req.params.id).then(result => {
     res.render('album', {
       albumImage: result.images[1].url,
+      albumName: result.name,
+      artistName: result.artists[0].name,
+      trackCount: result.tracks.items.length,
+      //TODO need to calculate the total track length 
+      duration: 1000,
       tracks: result.tracks,
       albumId: req.params.id
     })
