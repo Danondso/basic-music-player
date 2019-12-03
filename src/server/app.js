@@ -50,13 +50,21 @@ app.get('/album/:id', function (req, res) {
       albumName: result.name,
       artistName: result.artists[0].name,
       trackCount: result.tracks.items.length,
-      //TODO need to calculate the total track length 
-      duration: 1000,
+      duration: calculateTotalAlbumTime(result.tracks.items),
       tracks: result.tracks,
-      albumId: req.params.id
+      albumId: req.params.id,
+      copyright: result.copyrights[0].text
     })
   });
 });
+
+function calculateTotalAlbumTime(tracks) {
+  let durationMs = 0;
+  tracks.forEach(element => {
+    durationMs += element.duration_ms
+  })
+  return Math.floor(durationMs / 60000);
+}
 
 app.get('/', function (req, res) {
   res.render('login')

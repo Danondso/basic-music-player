@@ -1,18 +1,29 @@
-<div class="container">
+<div class="container track-panel">
+    <div class="row track">
+        <div class="col-lg-1 col-xl-1">
+            <p>#</p>
+        </div>
+        <div class="col-lg-9 col-xl-9">
+            <p>title</p>
+        </div>
+        <div class="col-lg-2 col-xl-2">
+            <p class="track-time">duration</p>
+        </div>
+    </div>
     {{#each tracks.items}}
-    <div class="row">
+    <div class="row track track-entry">
         <div class="col-lg-1 col-xl-1">
             {{this.track_number}}
         </div>
-        <div class="col-lg-8 col-xl-8">
+        <div class="col-lg-9 col-xl-9">
             {{this.name}}
         </div>
         <div class="col-lg-2 col-xl-2">
-            <span class="track-time">{{this.duration_ms}}</span>
+            <span class="track-time">{{this.duration_ms}} ms</span>
         </div>
-        {{!-- <div class="col">
-            {{this.href}}
-        </div> --}}
     </div>
     {{/each}}
+    <div class="track-panel">
+        <p>© {{copyright}}</p>
+    </div>
 </div>
