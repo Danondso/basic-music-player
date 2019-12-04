@@ -135,6 +135,12 @@ function renderHomePanel(res, access_token) {
   });
 }
 
+app.get('/logout', function(req, res) {
+  res.clearCookie("access_token");
+  res.clearCookie("refresh_token");
+  res.render('login');
+})
+
 app.get('/refresh_token', function (req, res) {
   let refresh_token = req.query.refresh_token;
   let authOptions = {

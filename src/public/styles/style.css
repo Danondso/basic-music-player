@@ -176,3 +176,13 @@ body{
   padding-bottom: .25rem;
   padding-top: .25rem;
 }
+
+.footer {
+  text-align: center;
+}
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  color: #808080 !important;
+ }
