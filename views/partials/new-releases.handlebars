@@ -1,18 +1,22 @@
-
-        <div>
-            <h4 class="panel-title">{{newReleaseTitle}}</h4>
-            <div class="selectors">
-                <i onclick="scrollPanelLeft('#new-releases')" class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
-                <i onclick="scrollPanelRight('#new-releases')" class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-            </div>
+<div>
+    <h4 class="panel-title">{{newReleaseTitle}}</h4>
+    <div class="selectors">
+        <i onclick="scrollPanelLeft('#new-releases')" class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
+        <i onclick="scrollPanelRight('#new-releases')" class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
+    </div>
+</div>
+<section class="container row panel-container" id="new-releases">
+    {{#each newReleaseItems}}
+    <section id="col-sm media-content">
+        <a href="/album/{{this.id}}">
+            <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}" />
+        </a>
+        <div class="album-data">
+            {{this.name}}
         </div>
-        <section class="container row panel-container" id="new-releases">
-            {{#each newReleaseItems}}
-            <section id="col-sm media-content">
-                <img class="media-object album-cover" width="150" height="150" src="{{this.images.1.url}}" />
-                <div class="album-data">
-                    {{this.name}}
-                </div>
-            </section>
-            {{/each}}
-        </section>
+        <div class="album-data">
+            {{this.artists.0.name}}
+        </div>
+    </section>
+    {{/each}}
+</section>
