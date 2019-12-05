@@ -29,6 +29,7 @@ body{
   color: #303C52;
   box-shadow: 2px 1px 6px #888888;
   border-radius: 20px;
+  border-color: #000000;
 }
 
 .landing-text {
@@ -71,9 +72,11 @@ body{
 
   .album-cover {
     margin-top: 2vh;
-    border-radius: 5px;
     margin-right: 1.21vw;
+  }
 
+  .album-image, .album-cover {
+    border-radius: 5px;
   }
 
   .album-data {
@@ -147,3 +150,39 @@ body{
 .selectors {
   float: right;
 }
+
+.album-info-panel {
+  padding-top: 12vh;
+}
+
+.album-info {
+  padding-left: 1rem;
+}
+
+.track-time{
+  float: right;
+}
+
+.track-panel {
+  margin-top: 2vh;
+}
+
+.track {
+  border-style: solid;
+  border-color: var(--font-color);
+  border-width: 0 0 1px 0;
+}
+.track-entry {
+  padding-bottom: .25rem;
+  padding-top: .25rem;
+}
+
+.footer {
+  text-align: center;
+}
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  color: #808080 !important;
+ }
