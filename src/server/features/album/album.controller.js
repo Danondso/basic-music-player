@@ -7,6 +7,7 @@ const AlbumController = {
             res.render('album', {
                 albumImage: result.images[1].url,
                 albumName: result.name,
+                artistId: result.artists[0].id,
                 artistName: result.artists[0].name,
                 trackCount: result.tracks.items.length,
                 duration: calculateTotalAlbumTime(result.tracks.items),

@@ -5,7 +5,7 @@ import exphbs from 'express-handlebars';
 import authenticationRouter from './features/authentication/authentication.router';
 import albumRouter from './features/album/album.router';
 import appRouter from './app.router';
-
+import artistRouter from './features/artist/artist.router';
 
 var app = express();
 
@@ -21,6 +21,7 @@ app.set('view engine', 'handlebars');
 
 app.use(appRouter);
 app.use(authenticationRouter);
+app.use(artistRouter);
 app.use(albumRouter);
 
 console.log('Listening on 8888');

@@ -57,8 +57,7 @@ const SpotifyApiWrapper = {
                 'Authorization': access_token
             }
         }).then(response => {
-            response.json().then(json => {
-            }).catch(error => {
+            response.json().then(json => {}).catch(error => {
                 console.log('ERROR:', error);
             });
             //TODO replace the jQUery hide stuff with templated 'if'
@@ -67,6 +66,45 @@ const SpotifyApiWrapper = {
 
     fetchAlbum: async function (access_token, id) {
         const response = await fetch(`https://api.spotify.com/v1/albums/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('ALBUM: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchArtist: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('ALBUM: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchTopTracks: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/top-tracks`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('ALBUM: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchArtistAlbums: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
