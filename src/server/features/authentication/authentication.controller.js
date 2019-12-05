@@ -1,8 +1,6 @@
 import '../../core/common/env';
 import request from 'request';
 import querystring from 'querystring';
-import SpotifyApiWrapper from '../../core/api/spotify-api';
-
 
 const stateKey = 'spotify_auth_state';
 const client_id = process.env.CLIENT_ID;
@@ -24,13 +22,10 @@ const AuthenticationController = {
                 state: state
             }));
     },
-    root: function (req, res) {
-        res.render('login')
-    },
     logout: function (req, res) {
         res.clearCookie("access_token");
         res.clearCookie("refresh_token");
-        res.render('login');
+        res.redirect('/');
     },
     refreshToken: function (req, res) {
         let refresh_token = req.query.refresh_token;
@@ -55,7 +50,6 @@ const AuthenticationController = {
             }
         });
     },
-
     callback: function (req, res) {
         const code = req.query.code || null;
         const state = req.query.state || null;
@@ -91,8 +85,7 @@ const AuthenticationController = {
                     res.cookie('refresh_token', refresh_token, {
                         expires: new Date(Date.now() + 8 * 3600000),
                     })
-                    //probably best to redirect to the home endpoint here and get the homePanelRender method out of here
-                    renderHomePanel(res, access_token);
+                    res.redirect('/home');
                 } else {
                     res.redirect('/#' +
                         querystring.stringify({
@@ -117,20 +110,5 @@ const generateRandomString = function (length) {
     }
     return text;
 };
-
-const renderHomePanel = function (res, access_token) {
-    SpotifyApiWrapper.fetchHomeData(access_token).then(result => {
-        res.render('home', {
-            recentlyPlayedTitle: 'Recently Played',
-            recentlyPlayedItems: result.recentlyPlayed,
-            newReleaseTitle: 'New Releases',
-            newReleaseItems: result.newReleases,
-            featuredPlaylistsTitle: 'Featured Playlists',
-            featuredPlaylistItems: result.featuredPlaylists,
-            topArtistsTitle: 'Top Artists',
-            topArtistItems: result.topArtists,
-        });
-    });
-}
 
 export default AuthenticationController;
