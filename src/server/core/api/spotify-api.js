@@ -86,7 +86,20 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('ALBUM: ', JSON.stringify(result))
+        console.log('ARTIST: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchRelatedArtists: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/related-artists`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        console.log('RELATED ARTISTS: ', JSON.stringify(result))
         return result;
     },
 
