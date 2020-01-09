@@ -1,0 +1,12 @@
+<div>
+    {{#each relatedArtists.artists}}
+    <div class="row track track-entry">
+        <div class="col-lg-1 col-xl-1">
+            {{!-- <img src="{{this.images[0].url}}"/> --}}
+        </div>
+        <div class="col-lg-9 col-xl-9">
+            <a href="/artist/{{this.id}}">{{this.name}}</a> 
+        </div>
+    </div>
+    {{/each}}
+</div>

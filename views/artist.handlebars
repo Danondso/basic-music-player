@@ -1,5 +1,17 @@
 <div class="container-fluid home-panel">
-    <div>
-         <img src="{{artistBackgroundImage}}" class="album-image" />
+    <div class="container album-info-panel">
+        <div class="row album-info">
+            <div class="col">
+                <img src="{{artistBackgroundImage}}" class="album-image" />
+            </div>
+            <div class="col">
+                <h2>
+                    <strong>{{artistName}}</strong>
+                </h2>
+            </div>
+        </div>
+        <div class="col">
+            {{> related-artists}}
+        </div>
     </div>
 </div>

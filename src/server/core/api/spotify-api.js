@@ -86,7 +86,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('ARTIST: ', JSON.stringify(result))
+    //    console.log('ARTIST: ', JSON.stringify(result))
         return result;
     },
 
@@ -125,7 +125,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('ALBUM: ', JSON.stringify(result))
+      //  console.log('ALBUM: ', JSON.stringify(result))
         return result;
     },
 
@@ -153,6 +153,19 @@ const SpotifyApiWrapper = {
             newReleases: newReleases,
             topArtists: topArtists,
             featuredPlaylists: featuredPlaylists
+        }
+    },
+
+    fetchArtistProfileData: async function (access_token, artistId) {
+        let artist = await this.fetchArtist(access_token, artistId);
+        // TODO probably a better way to handle this 
+        let relatedArtists = await this.fetchRelatedArtists(access_token, artistId);
+        let albums = await this.fetchArtistAlbums(access_token, artistId);
+
+        return {
+            artist: artist, 
+            relatedArtists: relatedArtists, 
+            albums: albums
         }
     }
 }
