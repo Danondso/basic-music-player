@@ -3,29 +3,28 @@
         <strong>Top Songs</strong>
     </h2>
     <div class="row track">
-        <div class="col-lg-1 col-xl-1">
+        <div class="w-25 col-lg-1 col-xl-1">
             <p>#</p>
         </div>
-        <div class="col-lg-9 col-xl-9">
+        <div class="w-25 col-lg-9 col-xl-9">
             <p>title</p>
         </div>
-        <div class="col-lg-2 col-xl-2">
+        <div class="w-50 col-lg-2 col-xl-2">
             <p class="track-time">duration</p>
         </div>
     </div>
     {{#each topTracks.tracks}}
     <div class="row track track-entry">
-        <div class="col-lg-1 col-xl-1">
-            <img src="{{this.album.images.2.url}}" />
+        <div class="w-25 col-sm-2 col-md-1 col-lg-1 col-xl-1">
+            <a href="/album/{{this.album.id}}">
+                <img src="{{this.album.images.2.url}}" class="image-thumbnail album-image" />
+            </a>
         </div>
-        <div class="col-lg-3 col-xl-3">
+        <div class="w-50 col-sm-8 col-md col-lg-1 col-lg-8 col-xl-8 margin-top-1-point-3">
             {{this.name}}
         </div>
-        <div class="col-lg-4 col-xl-4">
-            <a href="/album/{{this.album.id}}">{{this.album.name}}</a>
-        </div>
-        <div class="col-lg-4 col-xl-4">
-            <span class="track-time">{{this.duration_ms}} ms</span>
+        <div class="w-25 col-sm-2 col-md col-lg-1 col-lg-3 col-xl-3 margin-top-1-point-3">
+            <span class="track-time">{{this.duration_ms}}ms</span>
         </div>
     </div>
     {{/each}}
