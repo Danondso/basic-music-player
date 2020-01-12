@@ -1,4 +1,7 @@
 <div class="container track-panel">
+    <h2>
+        <strong>Top Songs</strong>
+    </h2>
     <div class="row track">
         <div class="col-lg-1 col-xl-1">
             <p>#</p>
@@ -10,18 +13,18 @@
             <p class="track-time">duration</p>
         </div>
     </div>
-    {{#each topTracks}}
+    {{#each topTracks.tracks}}
     <div class="row track track-entry">
         <div class="col-lg-1 col-xl-1">
-            {{this.track_number}}
+            <img src="{{this.album.images.2.url}}" />
         </div>
-        <div class="col-lg-9 col-xl-9">
+        <div class="col-lg-3 col-xl-3">
             {{this.name}}
         </div>
-        <div class="col-lg-9 col-xl-9">
-            {{this.album_name}}
+        <div class="col-lg-4 col-xl-4">
+            <a href="/album/{{this.album.id}}">{{this.album.name}}</a>
         </div>
-        <div class="col-lg-2 col-xl-2">
+        <div class="col-lg-4 col-xl-4">
             <span class="track-time">{{this.duration_ms}} ms</span>
         </div>
     </div>

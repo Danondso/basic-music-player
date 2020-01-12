@@ -106,7 +106,7 @@ const SpotifyApiWrapper = {
     },
 
     fetchTopTracks: async function (access_token, id) {
-        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/top-tracks`, {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=from_token`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -160,14 +160,16 @@ const SpotifyApiWrapper = {
 
     fetchArtistProfileData: async function (access_token, artistId) {
         let artist = await this.fetchArtist(access_token, artistId);
-        // TODO probably a better way to handle this 
+        // TODO probably a better way to handle this
+        let topTracks = await this.fetchTopTracks(access_token, artistId);
         let relatedArtists = await this.fetchRelatedArtists(access_token, artistId);
         let albums = await this.fetchArtistAlbums(access_token, artistId);
 
         return {
             artist: artist, 
             relatedArtists: relatedArtists, 
-            albums: albums
+            albums: albums,
+            topTracks: topTracks
         }
     }
 }
