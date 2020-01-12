@@ -10,7 +10,7 @@ const AlbumController = {
                 artistId: result.artists[0].id,
                 artistName: result.artists[0].name,
                 trackCount: result.tracks.items.length,
-                duration: calculateTotalAlbumTime(result.tracks.items),
+                duration: convertMillisecondsToSeconds(result.tracks.items),
                 tracks: result.tracks,
                 albumId: req.params.id,
                 copyright: result.copyrights[0].text
@@ -21,7 +21,7 @@ const AlbumController = {
     }
 }
 
-const calculateTotalAlbumTime = function (tracks) {
+const convertMillisecondsToSeconds = function (tracks) {
     let durationMs = 0;
     tracks.forEach(element => {
         durationMs += element.duration_ms
