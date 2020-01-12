@@ -1,25 +1,25 @@
 <div class="container track-panel">
     <div class="row track">
-        <div class="col-lg-1 col-xl-1">
+        <div class="w-25 col-lg-1 col-xl-1">
             <p>#</p>
         </div>
-        <div class="col-lg-9 col-xl-9">
+        <div class="w-25 col-lg-9 col-xl-9">
             <p>title</p>
         </div>
-        <div class="col-lg-2 col-xl-2">
+        <div class="w-50 col-lg-2 col-xl-2">
             <p class="track-time">duration</p>
         </div>
     </div>
     {{#each tracks.items}}
     <div class="row track track-entry">
-        <div class="col-lg-1 col-xl-1">
+        <div class="w-25 col-sm-2 col-lg-1 col-xl-1">
             {{this.track_number}}
         </div>
-        <div class="col-lg-9 col-xl-9">
+        <div class="w-50 col-sm-8 col-lg-9 col-xl-9">
             {{this.name}}
         </div>
-        <div class="col-lg-2 col-xl-2">
-            <span class="track-time">{{this.duration_ms}} ms</span>
+        <div class="w-25 col-sm-2 col-lg-2 col-xl-2">
+            <span class="track-time">{{this.duration_ms}}ms</span>
         </div>
     </div>
     {{/each}}
