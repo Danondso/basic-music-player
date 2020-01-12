@@ -1,17 +1,22 @@
 <div class="container-fluid home-panel">
-    <div class="container album-info-panel">
-        <div class="row album-info">
-            <div class="col">
-                <img src="{{artistBackgroundImage}}" class="album-image" />
+    <div class="container artist-info-panel">
+        <h2>
+            <strong>{{artistName}}</strong>
+        </h2>
+        <div class="row">
+            <div class="center col-xl-8">
+                <img src="{{artistBackgroundImage}}" class="center float-left artist-image" />
             </div>
-            <div class="col">
-                <h2>
-                    <strong>{{artistName}}</strong>
-                </h2>
+            <div class="col-xl-4">
+                <div class="float-right">
+                    {{> related-artists}}
+                </div>
             </div>
         </div>
-        <div class="col">
-            {{> related-artists}}
+        <div class="row">
+            {{!-- <div class="col">
+                {{> top-tracks-list}}
+            </div> --}}
         </div>
     </div>
 </div>

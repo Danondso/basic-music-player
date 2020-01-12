@@ -1,12 +1,15 @@
-<div>
-    {{#each relatedArtists.artists}}
-    <div class="row track track-entry">
-        <div class="col-lg-1 col-xl-1">
-            {{!-- <img src="{{this.images[0].url}}"/> --}}
+<div class="container-fluid">
+    <h5>
+        <strong>Related Artists</strong>
+    </h5>
+    <div>
+        {{#each relatedArtists.artists}}
+        <div class="margin-top-1">
+            <img src="{{this.images.2.url}}" class="album-image image-thumbnail" />
         </div>
-        <div class="col-lg-9 col-xl-9">
-            <a href="/artist/{{this.id}}">{{this.name}}</a> 
+        <div class="margin-top-point-1">
+            <a href="/artist/{{this.id}}" class="link">{{this.name}}</a>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
 </div>

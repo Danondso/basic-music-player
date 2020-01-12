@@ -1,4 +1,6 @@
 import fetch from 'node-fetch';
+import Logger from '../util';
+
 const SpotifyApiWrapper = {
 
     fetchTopArtists: async function (access_token) {
@@ -73,7 +75,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('ALBUM: ', JSON.stringify(result))
+        Logger.debug('ALBUM: ', JSON.stringify(result))
         return result;
     },
 
@@ -86,7 +88,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-    //    console.log('ARTIST: ', JSON.stringify(result))
+        Logger.debug('ARTIST: ', JSON.stringify(result));
         return result;
     },
 
@@ -99,7 +101,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('RELATED ARTISTS: ', JSON.stringify(result))
+        Logger.debug('RELATED ARTISTS: ', JSON.stringify(result))
         return result;
     },
 
@@ -112,7 +114,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('ALBUM: ', JSON.stringify(result))
+        Logger.debug('ALBUM: ', JSON.stringify(result))
         return result;
     },
 
@@ -125,7 +127,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-      //  console.log('ALBUM: ', JSON.stringify(result))
+        Logger.debug('ALBUM: ', JSON.stringify(result))
         return result;
     },
 

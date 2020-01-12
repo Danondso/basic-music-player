@@ -24,6 +24,10 @@ body{
   padding: 1rem;
 }
 
+a {
+  color: var(--font-color);
+}
+
 .btn-primary {
   background: #D48F81 !important;
   color: #303C52;
@@ -75,8 +79,40 @@ body{
     margin-right: 1.21vw;
   }
 
-  .album-image, .album-cover {
+  .album-image, .album-cover, .artist-image {
     border-radius: 5px;
+  }
+
+  .artist-image {
+    justify-content: center;
+  }
+
+  .float-right {
+    float: right;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  .image-thumbnail{
+    height: 50px;
+    width: 50px;
+  }
+
+  .margin-top-1 {
+    margin-top: 1vh;
+  }
+  
+  .margin-top-point-1 {
+    margin-top: .1vh;
   }
 
   .album-data {
@@ -151,11 +187,11 @@ body{
   float: right;
 }
 
-.album-info-panel {
+.album-info-panel, .artist-info-panel {
   padding-top: 12vh;
 }
 
-.album-info {
+.album-info, .artist-info {
   padding-left: 1rem;
 }
 
