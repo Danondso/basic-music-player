@@ -1,4 +1,6 @@
 import fetch from 'node-fetch';
+import Logger from '../util';
+
 const SpotifyApiWrapper = {
 
     fetchTopArtists: async function (access_token) {
@@ -57,8 +59,7 @@ const SpotifyApiWrapper = {
                 'Authorization': access_token
             }
         }).then(response => {
-            response.json().then(json => {
-            }).catch(error => {
+            response.json().then(json => {}).catch(error => {
                 console.log('ERROR:', error);
             });
             //TODO replace the jQUery hide stuff with templated 'if'
@@ -74,7 +75,59 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
-        console.log('ALBUM: ', JSON.stringify(result))
+        Logger.debug('ALBUM: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchArtist: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        Logger.debug('ARTIST: ', JSON.stringify(result));
+        return result;
+    },
+
+    fetchRelatedArtists: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/related-artists`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        Logger.debug('RELATED ARTISTS: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchTopTracks: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/top-tracks?country=from_token`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        Logger.debug('ALBUM: ', JSON.stringify(result))
+        return result;
+    },
+
+    fetchArtistAlbums: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${id}/albums`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        Logger.debug('ALBUM: ', JSON.stringify(result))
         return result;
     },
 
@@ -102,6 +155,21 @@ const SpotifyApiWrapper = {
             newReleases: newReleases,
             topArtists: topArtists,
             featuredPlaylists: featuredPlaylists
+        }
+    },
+
+    fetchArtistProfileData: async function (access_token, artistId) {
+        let artist = await this.fetchArtist(access_token, artistId);
+        // TODO probably a better way to handle this
+        let topTracks = await this.fetchTopTracks(access_token, artistId);
+        let relatedArtists = await this.fetchRelatedArtists(access_token, artistId);
+        let albums = await this.fetchArtistAlbums(access_token, artistId);
+
+        return {
+            artist: artist, 
+            relatedArtists: relatedArtists, 
+            albums: albums,
+            topTracks: topTracks
         }
     }
 }

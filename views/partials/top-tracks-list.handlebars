@@ -1,4 +1,7 @@
 <div class="container track-panel">
+    <h3>
+        <strong>Popular</strong>
+    </h3>
     <div class="row track">
         <div class="w-25 col-lg-1 col-xl-1">
             <p>#</p>
@@ -10,20 +13,19 @@
             <p class="track-time">duration</p>
         </div>
     </div>
-    {{#each tracks.items}}
+    {{#each topTracks.tracks}}
     <div class="row track track-entry">
-        <div class="w-25 col-sm-2 col-lg-1 col-xl-1">
-            {{this.track_number}}
+        <div class="w-25 col-sm-2 col-md-1 col-lg-1 col-xl-1">
+            <a href="/album/{{this.album.id}}">
+                <img src="{{this.album.images.2.url}}" class="image-thumbnail album-image" />
+            </a>
         </div>
-        <div class="w-50 col-sm-8 col-lg-9 col-xl-9">
+        <div class="w-50 col-sm-8 col-md col-lg-1 col-lg-8 col-xl-8 margin-top-1-point-3">
             {{this.name}}
         </div>
-        <div class="w-25 col-sm-2 col-lg-2 col-xl-2">
+        <div class="w-25 col-sm-2 col-md col-lg-1 col-lg-3 col-xl-3 margin-top-1-point-3">
             <span class="track-time">{{this.duration_ms}}ms</span>
         </div>
     </div>
     {{/each}}
-    <div class="track-panel">
-        <p>© {{copyright}}</p>
-    </div>
 </div>
