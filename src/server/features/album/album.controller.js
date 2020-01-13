@@ -1,4 +1,5 @@
 import SpotifyApiWrapper from '../../core/api/spotify-api';
+import Logger from '../../core/util';
 
 const AlbumController = {
     album: function (req, res) {
@@ -16,7 +17,7 @@ const AlbumController = {
                 copyright: result.copyrights[0].text
             })
         }).catch(error => {
-            console.log(error);
+            Logger.error(error);
         });
     }
 }
