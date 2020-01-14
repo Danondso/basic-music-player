@@ -22,6 +22,7 @@ body{
   color: var(--font-color) !important;
   margin-right: .4vw;
   padding: 1rem;
+  font-size: .75rem;
 }
 
 a {
