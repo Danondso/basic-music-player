@@ -10,15 +10,22 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a id="title-brand" class="navbar-brand navbar-brand-title" href="#">basic-music-player</a>
-        <a class="navigation-link" id="home-link" href="/home">Home</a>
-        <a class="navigation-link" id="playlists-link" href="/playlists">Playlists</a>
-        <a class="navigation-link" id="podcasts-link" href="/podcasts">Podcasts</a>
-        <a id="logout-button" href="/logout" class="btn btn-primary">Logout</a>
-        <a id="login-button" href="/login" class="btn btn-primary">Login</a>
-        {{!-- <div id="user-name"></div> --}}
-        {{!-- <a class="navbar-brand" href="#">hello-{{display_name}}</a> Making this a partial would fix it --}}
+        <a class="navbar-brand" href="#">basic-music-player</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link disabled" href="/playlists">Playlists</a>
+                <a class="nav-item nav-link disabled"href="/podcasts">Podcasts</a>
+                <a id="logout-button" href="/logout" class="nav-item nav-link btn btn-primary">Logout</a>
+            <a id="login-button" href="/login" class="nav-item nav-link btn btn-primary">Login</a>
+            </div>
+        </div>
     </nav>
     {{{body}}}
 </body>

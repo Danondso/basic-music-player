@@ -17,16 +17,8 @@ a {
   background: var(--main-bg-color) !important;
 }
 
-.navbar-brand,
-.navigation-links {
+.navbar-brand {
   color: var(--font-color) !important;
-}
-
-.navigation-link {
-  color: var(--font-color) !important;
-  margin-right: .4vw;
-  padding: 1rem;
-  font-size: .75rem;
 }
 
 .btn-primary {
