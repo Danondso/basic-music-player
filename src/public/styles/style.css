@@ -1,20 +1,24 @@
-
 :root {
-  --main-bg-color:  #DAD9C7;
+  --main-bg-color: #DAD9C7;
   --font-color: #40404C;
   --panel-color: #7A8392;
 }
 
-body{
+body {
   scroll-behavior: smooth;
   background: var(--main-bg-color);
+}
+
+a {
+  color: var(--font-color);
 }
 
 .navbar {
   background: var(--main-bg-color) !important;
 }
 
-.navbar-brand, .navigation-links {
+.navbar-brand,
+.navigation-links {
   color: var(--font-color) !important;
 }
 
@@ -23,10 +27,6 @@ body{
   margin-right: .4vw;
   padding: 1rem;
   font-size: .75rem;
-}
-
-a {
-  color: var(--font-color);
 }
 
 .btn-primary {
@@ -38,113 +38,107 @@ a {
 }
 
 .landing-text {
-  color: var(--font-color);  
+  color: var(--font-color);
   font-size: 3vw;
 }
 
 .landing-text-container {
   margin-top: 4vh;
-  margin-left:24vw;
+  margin-left: 24vw;
 }
 
 
-#login, #loggedin {
-    display: none;
-  }
-  .text-overflow {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+#login,
+#loggedin {
+  display: none;
+}
 
-  .login-button {
-      float: right;
-  }
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-  .profile-picture {
-    float: right;
-    width: 30;
-    height: 30;
-  }
+.home-panel {
+  background: var(--panel-color);
+  color: var(--font-color);
+  box-shadow: 0 4px 2px -2px;
+  padding-bottom: 10px;
+  margin-top: 6vh;
+}
 
-  .home-panel {
-    background: var(--panel-color);
-    color: var(--font-color);
-    box-shadow: 0 4px 2px -2px;
-    padding-bottom: 10px;
-    margin-top: 6vh;  
-  }
+.album-cover {
+  margin-top: 2vh;
+  margin-right: 1.21vw;
+}
 
-  .album-cover {
-    margin-top: 2vh;
-    margin-right: 1.21vw;
-  }
+.album-image,
+.album-cover,
+.artist-image {
+  border-radius: 5px;
+}
 
-  .album-image, .album-cover, .artist-image {
-    border-radius: 5px;
-  }
+.artist-image {
+  justify-content: center;
+}
 
-  .artist-image {
-    justify-content: center;
-  }
+.float-right {
+  float: right;
+}
 
-  .float-right {
-    float: right;
-  }
+.float-left {
+  float: left;
+}
 
-  .float-left {
-    float: left;
-  }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
+.image-thumbnail {
+  height: 50px;
+  width: 50px;
+}
 
-  .image-thumbnail{
-    height: 50px;
-    width: 50px;
-  }
+.margin-top-1 {
+  margin-top: 1vh;
+}
 
-  .margin-top-1 {
-    margin-top: 1vh;
-  }
+.margin-top-3 {
+  margin-top: 4vh;
+}
 
-  .margin-top-3 {
-    margin-top: 4vh;
-  }
-  
-  .margin-top-point-1 {
-    margin-top: .1vh;
-  }
+.margin-top-point-1 {
+  margin-top: .1vh;
+}
 
-  .margin-top-1-point-3 {
-    margin-top: 1.3vh;
-  }
+.margin-top-1-point-3 {
+  margin-top: 1.3vh;
+}
 
-  .album-data {
-    text-overflow: ellipsis;
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 10vw;
-  }
+.album-data {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 10vw;
+}
 
-  .panel-container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-  
 .panel-container {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-.panel-container::-webkit-scrollbar { 
-    display: none;
+.panel-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.panel-container::-webkit-scrollbar {
+  display: none;
 }
 
 .panel-title {
@@ -161,7 +155,11 @@ a {
   .album-data {
     max-width: 43vw;
   }
-} 
+
+  .hamburger-menu {
+    display: inline;
+  }
+}
 
 @media only screen and (min-width: 414px) {
 
@@ -172,13 +170,18 @@ a {
   .album-data {
     max-width: 35vw;
   }
-} 
+
+  .hamburger-menu {
+    display: inline;
+  }
+
+}
 
 @media only screen and (min-width: 600px) {
   .album-data {
     max-width: 40vw;
   }
-} 
+}
 
 @media only screen and (min-width: 768px) {
   .album-data {
@@ -190,22 +193,20 @@ a {
   .album-data {
     max-width: 8vw;
   }
+
+  .hamburger-menu {
+    display: none;
+  }
 }
 
-.selectors {
-  float: right;
-}
-
-.album-info-panel, .artist-info-panel {
+.album-info-panel,
+.artist-info-panel {
   padding-top: 12vh;
 }
 
-.album-info, .artist-info {
+.album-info,
+.artist-info {
   padding-left: 1rem;
-}
-
-.track-time{
-  float: right;
 }
 
 .track-panel {
@@ -223,12 +224,8 @@ a {
   padding-top: .25rem;
 }
 
-.footer {
-  text-align: center;
-}
-
 .not-active {
   pointer-events: none;
   cursor: default;
   color: #808080 !important;
- }
+}

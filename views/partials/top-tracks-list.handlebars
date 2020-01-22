@@ -10,7 +10,7 @@
             <p>title</p>
         </div>
         <div class="w-50 col-lg-2 col-xl-2">
-            <p class="track-time">duration</p>
+            <p class="float-right">duration</p>
         </div>
     </div>
     {{#each topTracks.tracks}}
@@ -24,7 +24,7 @@
             {{this.name}}
         </div>
         <div class="w-25 col-sm-2 col-md col-lg-1 col-lg-3 col-xl-3 margin-top-1-point-3">
-            <span class="track-time">{{this.duration_ms}}ms</span>
+            <span class="float-right">{{this.duration_ms}}ms</span>
         </div>
     </div>
     {{/each}}

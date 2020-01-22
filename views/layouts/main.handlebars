@@ -12,24 +12,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a id="title-brand" class="navbar-brand navbar-brand-title" href="#">basic-music-player</a>
-        <a data-toggle="collapse" href="#navbarCollapse" role="button" aria-expanded="false"
-            aria-controls="navbarCollapse">
-            <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
-        </a>
+        <a class="navigation-link" id="home-link" href="/home">Home</a>
+        <a class="navigation-link" id="playlists-link" href="/playlists">Playlists</a>
+        <a class="navigation-link" id="podcasts-link" href="/podcasts">Podcasts</a>
+        <a id="logout-button" href="/logout" class="btn btn-primary">Logout</a>
+        <a id="login-button" href="/login" class="btn btn-primary">Login</a>
         {{!-- <div id="user-name"></div> --}}
-        {{!-- <a class="navbar-brand" href="#">hello-{{display_name}}</a> --}}
-        <div class="container-fluid">
-            <div class="collapse" id="navbarCollapse">
-                <div class="navigation-links">
-                    <a class="navigation-link" id="home-link" href="/home">Home</a>
-                    <a class="navigation-link" id="playlists-link" href="/playlists">Playlists</a>
-                    <a class="navigation-link" id="podcasts-link" href="/podcasts">Podcasts</a>
-                    <a id="logout-button" href="/logout" class="btn btn-primary">Logout</a>
-                    <a id="login-button" href="/login" class="btn btn-primary">Login</a>
-                </div>
-
-            </div>
-        </div>
+        {{!-- <a class="navbar-brand" href="#">hello-{{display_name}}</a> Making this a partial would fix it --}}
     </nav>
     {{{body}}}
 </body>
