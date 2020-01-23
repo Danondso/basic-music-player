@@ -166,8 +166,8 @@ const SpotifyApiWrapper = {
         let albums = await this.fetchArtistAlbums(access_token, artistId);
 
         return {
-            artist: artist, 
-            relatedArtists: relatedArtists, 
+            artist: artist,
+            relatedArtists: relatedArtists,
             albums: albums,
             topTracks: topTracks
         }

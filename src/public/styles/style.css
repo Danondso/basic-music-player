@@ -82,6 +82,10 @@ a {
   float: left;
 }
 
+.padding-left-10 {
+  padding-left: 10px;
+}
+
 .center {
   display: block;
   margin-left: auto;
@@ -148,8 +152,8 @@ a {
     max-width: 43vw;
   }
 
-  .hamburger-menu {
-    display: inline;
+  .related-artists-container {
+    margin-top: 1vh;
   }
 }
 
@@ -162,11 +166,6 @@ a {
   .album-data {
     max-width: 35vw;
   }
-
-  .hamburger-menu {
-    display: inline;
-  }
-
 }
 
 @media only screen and (min-width: 600px) {
@@ -184,10 +183,6 @@ a {
 @media only screen and (min-width: 1200px) {
   .album-data {
     max-width: 8vw;
-  }
-
-  .hamburger-menu {
-    display: none;
   }
 }
 
