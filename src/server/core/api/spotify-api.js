@@ -51,19 +51,17 @@ const SpotifyApiWrapper = {
         return result.playlists.items;
     },
 
-    fetchUserProfile: function (access_token) {
-        fetch('https://api.spotify.com/v1/me', {
+    fetchUserProfile: async function (access_token) {
+        const response = await fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': access_token
+                'Authorization': access_token,
             }
-        }).then(response => {
-            response.json().then(json => {}).catch(error => {
-                console.log('ERROR:', error);
-            });
-            //TODO replace the jQUery hide stuff with templated 'if'
         });
+        const result = await response.json();
+        Logger.debug('USER PROFILE: ', JSON.stringify(result))
+        return result;
     },
 
     fetchAlbum: async function (access_token, id) {
@@ -149,8 +147,10 @@ const SpotifyApiWrapper = {
         let topArtists = await this.fetchTopArtists(access_token);
         let newReleases = await this.fetchNewReleases(access_token);
         let recentlyPlayed = await this.fetchRecentlyPlayed(access_token);
+        let profile = await this.fetchUserProfile(access_token);
 
         return {
+            profile: profile,
             recentlyPlayed: recentlyPlayed,
             newReleases: newReleases,
             topArtists: topArtists,

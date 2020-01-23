@@ -12,6 +12,7 @@ const AppController = {
 const renderHomePanel = function (res, access_token) {
     SpotifyApiWrapper.fetchHomeData(access_token).then(result => {
         res.render('home', {
+            displayName: result.profile.display_name,
             recentlyPlayedTitle: 'Recently Played',
             recentlyPlayedItems: result.recentlyPlayed,
             newReleaseTitle: 'New Releases',
