@@ -68,9 +68,9 @@ a {
   border-radius: 5px;
 }
 
-.img-lg {
-  height: 640px;
-  width: 640px;
+.responsive-image {
+  width: 100%;
+  height: auto;
 }
 
 .justify-center {
