@@ -64,15 +64,16 @@ a {
   margin-right: 1.21vw;
 }
 
-.album-image,
-.album-cover,
-.artist-image {
+.img-rounded {
   border-radius: 5px;
+}
+
+.img-lg {
   height: 640px;
   width: 640px;
 }
 
-.artist-image {
+.justify-center {
   justify-content: center;
 }
 
@@ -86,13 +87,6 @@ a {
 
 .padding-left-10 {
   padding-left: 10px;
-}
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
 }
 
 .image-thumbnail {
