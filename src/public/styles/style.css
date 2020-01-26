@@ -68,6 +68,8 @@ a {
 .album-cover,
 .artist-image {
   border-radius: 5px;
+  height: 640px;
+  width: 640px;
 }
 
 .artist-image {
