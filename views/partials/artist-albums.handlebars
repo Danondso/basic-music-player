@@ -1,0 +1,11 @@
+{{#each albums}}
+<div class="margin-top-3">
+    <img src="{{this.album.images.1.url}}" class="img-rounded" />
+    <div class="margin-top-1">
+        <h2>
+            <strong>{{this.album.name}}</strong>
+        </h2>
+    </div>
+</div>
+{{> tracklist}}
+{{/each}}

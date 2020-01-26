@@ -12,7 +12,8 @@ const ArtistController = {
                 artistName: result.artist.name,
                 artistBackgroundImage: result.artist.images[0].url,
                 relatedArtists: result.relatedArtists,
-                topTracks: result.topTracks
+                topTracks: result.topTracks,
+                albums: result.albums
             });
         })
 

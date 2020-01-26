@@ -77,6 +77,20 @@ const SpotifyApiWrapper = {
         return result;
     },
 
+
+    fetchAlbumTracks: async function (access_token, id) {
+        const response = await fetch(`https://api.spotify.com/v1/albums/${id}/tracks`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        Logger.debug('ALBUM TRACKS: ', JSON.stringify(result))
+        return result;
+    },
+
     fetchArtist: async function (access_token, id) {
         const response = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
             method: 'GET',
@@ -160,10 +174,18 @@ const SpotifyApiWrapper = {
 
     fetchArtistProfileData: async function (access_token, artistId) {
         let artist = await this.fetchArtist(access_token, artistId);
-        // TODO probably a better way to handle this
         let topTracks = await this.fetchTopTracks(access_token, artistId);
         let relatedArtists = await this.fetchRelatedArtists(access_token, artistId);
-        let albums = await this.fetchArtistAlbums(access_token, artistId);
+        let artistAlbums = await this.fetchArtistAlbums(access_token, artistId);
+
+        let albums = [];
+        if(artistAlbums.items) {
+            for(let i = 0; i < artistAlbums.items.length; i++) {
+                let album = artistAlbums.items[i];
+                let tracks = await this.fetchAlbumTracks(access_token, album.id);
+                albums.push({album: album, tracks: tracks});
+            }
+        }
 
         return {
             artist: artist,
