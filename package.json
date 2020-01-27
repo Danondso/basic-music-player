@@ -4,7 +4,7 @@
   "description": "Spotify clone written in vanilla JS. ",
   "main": "index.js",
   "scripts": {
-    "test": "npm start",
+    "test": "nyc --reporter=text mocha './src/**/*.test.js' --require @babel/register --exit",
     "build": "babel src -d lib",
     "start": "babel src/server/app.js",
     "start:dev": "nodemon --exec babel-node src/server/app.js"
@@ -34,6 +34,8 @@
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
     "cookie-parser": "^1.4.4",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
@@ -41,8 +43,11 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "js-logger": "^1.6.0",
+    "mocha": "^7.0.1",
     "node-fetch": "^2.6.0",
+    "nyc": "^15.0.0",
     "querystring": "^0.2.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "sinon": "^8.1.1"
   }
 }
