@@ -36,6 +36,7 @@ const SpotifyApiWrapper = {
             }
         });
         const result = await response.json();
+        Logger.debug('NEW RELEASES FETCH:', JSON.stringify(result));
         return result.albums.items;
     },
 

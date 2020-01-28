@@ -1,0 +1,26 @@
+{
+    "country": "US",
+    "display_name": "testuser",
+    "email": "notarealemail@email.com",
+    "explicit_content": {
+        "filter_enabled": false,
+        "filter_locked": false
+    },
+    "external_urls": {
+        "spotify": "https://open.spotify.com/user/testuser"
+    },
+    "followers": {
+        "href": null,
+        "total": 2
+    },
+    "href": "https://api.spotify.com/v1/users/testuser",
+    "id": "testuser",
+    "images": [{
+        "height": null,
+        "url": "https://profile-images.scdn.co/images/userprofile/default/fake",
+        "width": null
+    }],
+    "product": "premium",
+    "type": "user",
+    "uri": "spotify:user:testuser"
+}

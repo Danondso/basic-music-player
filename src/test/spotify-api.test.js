@@ -1,7 +1,5 @@
 import 'babel-polyfill';
 import chai from 'chai';
-import mocha from 'mocha';
-import Response from 'node-fetch';
 import SpotifyApiWrapper from '../server/core/api/spotify-api.js';
 import sinon from 'sinon';
 import fetch from 'node-fetch';
@@ -38,16 +36,18 @@ describe('app.controller', () => {
     });
 
     it('should fetch new releases', () => {
-        const stub = sinon.stub(fetch, 'Promise').returns(Promise.resolve({
+        const payload = require('../test/payloads/new.releases.0.json');
+        const stub = sinon.stub(fetch, 'Promise').returns({
             json: () => {
-                return {
-                    items: []
-                };
+                return payload;
             }
-        }));
+        });
 
         const result = SpotifyApiWrapper.fetchNewReleases('access_token');
-        chai.expect(stub.calledOnce).to.be.true;
+        result.then(r => {
+            chai.expect(stub.calledOnce).to.be.true;
+            chai.expect(JSON.stringify(r)).to.eql(JSON.stringify(payload.albums.items));
+        });
     });
 
     it('should fetch featured playlists', () => {
@@ -64,15 +64,17 @@ describe('app.controller', () => {
     });
 
     it('should fetch user profile', () => {
+        const payload = require('../test/payloads/user.profile.0.json');
         const stub = sinon.stub(fetch, 'Promise').returns(Promise.resolve({
             json: () => {
-                return {
-                    items: []
-                };
+                return payload;
             }
         }));
 
         const result = SpotifyApiWrapper.fetchUserProfile('access_token');
-        chai.expect(stub.calledOnce).to.be.true;
+        result.then(r => {
+            chai.expect(stub.calledOnce).to.be.true;
+            chai.expect(JSON.stringify(r)).to.eql(JSON.stringify(payload));
+        });
     });
 });
