@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc --reporter=text mocha './src/**/*.test.js' --require @babel/register --exit",
     "build": "babel src -d lib",
-    "start": "babel src/server/app.js",
+    "start": "babel-node src/server/app.js",
     "start:dev": "nodemon --exec babel-node src/server/app.js"
   },
   "repository": {

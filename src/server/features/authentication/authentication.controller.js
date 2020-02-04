@@ -44,9 +44,14 @@ const AuthenticationController = {
         request.post(authOptions, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 const access_token = body.access_token;
-                res.send({
-                    'access_token': access_token
+                res.clearCookie('access_token');
+                res.cookie('access_token', access_token, {
+                    expires: new Date(Date.now() + 8 * 3600000),
                 });
+                res.cookie('refresh_token', refresh_token, {
+                    expires: new Date(Date.now() + 8 * 3600000),
+                });
+                res.redirect('/home');
             }
         });
     },
@@ -81,10 +86,10 @@ const AuthenticationController = {
                     let refresh_token = body.refresh_token;
                     res.cookie('access_token', access_token, {
                         expires: new Date(Date.now() + 8 * 3600000),
-                    })
+                    });
                     res.cookie('refresh_token', refresh_token, {
                         expires: new Date(Date.now() + 8 * 3600000),
-                    })
+                    });
                     res.redirect('/home');
                 } else {
                     res.redirect('/#' +
