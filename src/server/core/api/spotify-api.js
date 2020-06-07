@@ -194,6 +194,20 @@ const SpotifyApiWrapper = {
             albums: albums,
             topTracks: topTracks
         }
+    },
+
+    search: async function (access_token, query) {
+        const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURI(query)}&type=album,artist,track`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': access_token,
+            }
+        });
+        const result = await response.json();
+        Logger.debug('Query results: ', JSON.stringify(result));
+
+        return result;
     }
 }
 

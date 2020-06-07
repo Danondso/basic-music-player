@@ -24,6 +24,13 @@
                 <a class="nav-item nav-link disabled" href="/podcasts">Podcasts</a>
                 <a id="logout-button" href="/logout" class="nav-item nav-link">Logout</a>
                 <a id="login-button" href="/login" class="nav-item nav-link">Login</a>
+                <div id="search-container" class="input-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search..">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="search-input"
+                            onclick="handleSearch()">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -42,6 +49,7 @@
     (function () {
         if (getCookie("access_token")) {
             $('#brand-with-name').show();
+            $('#search-container').show();
             $('#brand-title').hide();
             $('#login-button').hide();
             $('#logout-button').show();
@@ -50,6 +58,7 @@
             $('#podcasts-link').removeClass('not-active');
         } else {
             $('#brand-with-name').hide();
+            $('#search-container').hide();
             $('#brand-title').show();
             $('#logout-button').hide();
             $('#login-button').show();
@@ -59,6 +68,11 @@
         }
     })();
 </script>
+<script>
+    function handleSearch() {
+        const query = document.getElementById("search-input").value;
+        location.href = `http://localhost:8888/search?query=${query}`;
+    }
 </script>
 
 </html>

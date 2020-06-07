@@ -6,6 +6,7 @@ import authenticationRouter from './features/authentication/authentication.route
 import albumRouter from './features/album/album.router';
 import appRouter from './app.router';
 import artistRouter from './features/artist/artist.router';
+import searchRouter from './features/search/search.router';
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(appRouter);
 app.use(authenticationRouter);
 app.use(artistRouter);
 app.use(albumRouter);
+app.use(searchRouter)
 
 console.log('Listening on 8888');
 app.listen(8888);
