@@ -44,7 +44,7 @@
     "express-handlebars": "^3.1.0",
     "js-logger": "^1.6.0",
     "mocha": "^7.0.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nyc": "^15.0.0",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
